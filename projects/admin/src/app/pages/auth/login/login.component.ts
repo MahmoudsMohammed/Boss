@@ -17,10 +17,19 @@ export class loginComponent {
     ]),
   });
 
-  getErrorMessage() {
+  getEmailError() {
     if (this.form.get('email').hasError('required')) {
       return 'You must enter a value';
     }
     return this.form.get('email').hasError('email') ? 'Not a valid email' : '';
+  }
+
+  getPasswordError() {
+    if (this.form.get('password').hasError('required')) {
+      return 'You must enter a value';
+    }
+    return this.form.get('password').hasError('minlength')
+      ? 'Password Min Length is 8'
+      : '';
   }
 }

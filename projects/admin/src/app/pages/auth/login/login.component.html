@@ -16,12 +16,19 @@
             required
           />
           @if (form.get('email').invalid) {
-          <mat-error>{{ getErrorMessage() }}</mat-error>
+          <mat-error>{{ getEmailError() }}</mat-error>
           }
         </mat-form-field>
         <mat-form-field>
           <mat-label>Enter your password</mat-label>
-          <input matInput [type]="hide ? 'password' : 'text'" />
+          <input
+            matInput
+            [type]="hide ? 'password' : 'text'"
+            formControlName="password"
+          />
+          @if (form.get('password').invalid && form.get('password').touched) {
+          <mat-error>{{ getPasswordError() }}</mat-error>
+          }
           <button
             mat-icon-button
             matSuffix
