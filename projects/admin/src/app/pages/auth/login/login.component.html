@@ -13,7 +13,6 @@
             matInput
             placeholder="pat@example.com"
             formControlName="email"
-            required
           />
           @if (form.get('email').invalid) {
           <mat-error>{{ getEmailError() }}</mat-error>

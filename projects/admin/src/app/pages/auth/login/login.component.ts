@@ -14,6 +14,7 @@ export class loginComponent {
     password: new FormControl('', [
       Validators.required,
       Validators.minLength(8),
+      Validators.maxLength(40),
     ]),
   });
 
@@ -27,9 +28,10 @@ export class loginComponent {
   getPasswordError() {
     if (this.form.get('password').hasError('required')) {
       return 'You must enter a value';
+    }else if(this.form.get('password').hasError('maxlength')){
+      return 'Password Max Length is 40'
+    }else{
+      return 'Password Min Length is 8'
     }
-    return this.form.get('password').hasError('minlength')
-      ? 'Password Min Length is 8'
-      : '';
   }
 }
