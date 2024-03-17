@@ -6,7 +6,7 @@
   <div class="right-side">
     <div class="form-container">
       <p>Login</p>
-      <form [formGroup]="form">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <mat-form-field>
           <mat-label>Enter your email</mat-label>
           <input
@@ -24,6 +24,7 @@
             matInput
             [type]="hide ? 'password' : 'text'"
             formControlName="password"
+            maxlength="40"
           />
           @if (form.get('password').invalid && form.get('password').touched) {
           <mat-error>{{ getPasswordError() }}</mat-error>
@@ -38,7 +39,14 @@
             <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
           </button>
         </mat-form-field>
-        <button class="btn btn-custom" type="submit">Login</button>
+        <button
+          class="btn btn-custom"
+          type="submit"
+          [disabled]="!form.valid"
+          [ngClass]="{ unallowed: !form.valid }"
+        >
+          Login
+        </button>
       </form>
     </div>
   </div>
