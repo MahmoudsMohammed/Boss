@@ -53,6 +53,7 @@ export class loginComponent {
       },
       (err) => {
         console.log(err);
+        this.showError(err.error.message);
       }
     );
   }
@@ -60,5 +61,10 @@ export class loginComponent {
   // toastr success
   showSuccess() {
     this.toastr.success('Successful Login', 'Welcome 🙂');
+  }
+
+  // toastr error
+  showError(m: string) {
+    this.toastr.error(m, 'Login Failed 🙂');
   }
 }
