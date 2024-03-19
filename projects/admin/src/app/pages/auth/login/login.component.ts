@@ -2,6 +2,7 @@ import { loginRequest } from './../auth.models';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { authService } from '../auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,7 @@ import { authService } from '../auth.service';
   styleUrl: './login.component.scss',
 })
 export class loginComponent {
-  constructor(private authSer: authService) {}
+  constructor(private authSer: authService, private toastr: ToastrService) {}
   hide = true;
 
   form = new FormGroup({
@@ -48,10 +49,16 @@ export class loginComponent {
     this.authSer.login(data).subscribe(
       (res) => {
         console.log(res);
+        this.showSuccess();
       },
       (err) => {
         console.log(err);
       }
     );
+  }
+
+  // toastr success
+  showSuccess() {
+    this.toastr.success('Successful Login', 'Welcome 🙂');
   }
 }
