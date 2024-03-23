@@ -1,8 +1,8 @@
-import { loginRequest } from './../auth.models';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { authService } from '../auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { loginRequest } from './login.models';
+import { loginService } from './login.service';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +10,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './login.component.scss',
 })
 export class loginComponent {
-  constructor(private authSer: authService, private toastr: ToastrService) {}
+  constructor(private authSer: loginService, private toastr: ToastrService) {}
   hide = true;
 
   form = new FormGroup({

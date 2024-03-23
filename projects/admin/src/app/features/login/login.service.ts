@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { loginRequest, loginResponse } from './auth.models';
+import { loginRequest, loginResponse } from './login.models';
 
 @Injectable({ providedIn: 'root' })
-export class authService {
+export class loginService {
   constructor(private http: HttpClient) {}
 
   login(data: loginRequest): Observable<loginResponse> {

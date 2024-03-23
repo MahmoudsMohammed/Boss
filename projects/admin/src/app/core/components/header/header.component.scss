@@ -1,0 +1,12 @@
+nav {
+  & {
+    height: 70px;
+    display: flex;
+    align-items: center;
+  }
+  span {
+    font-size: 24px;
+    color: #1a0f91;
+    font-weight: 600;
+  }
+}
