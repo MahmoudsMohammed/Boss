@@ -3,6 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { loginRequest } from './login.models';
 import { loginService } from './login.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +12,12 @@ import { loginService } from './login.service';
   styleUrl: './login.component.scss',
 })
 export class loginComponent {
-  constructor(private authSer: loginService, private toastr: ToastrService) {}
+  constructor(
+    private authSer: loginService,
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService,
+    private router: Router
+  ) {}
   hide = true;
 
   form = new FormGroup({
@@ -46,13 +53,15 @@ export class loginComponent {
       password: this.form.get('password').value,
       role: 'admin',
     };
+    this.spinner.show();
     this.authSer.login(data).subscribe(
       (res) => {
-        console.log(res);
+        this.spinner.hide();
         this.showSuccess();
+        this.router.navigate(['/tasks']);
       },
       (err) => {
-        console.log(err);
+        this.spinner.hide();
         this.showError(err.error.message);
       }
     );
@@ -60,11 +69,11 @@ export class loginComponent {
 
   // toastr success
   showSuccess() {
-    this.toastr.success('Successful Login', 'Welcome 🙂');
+    this.toastr.success('Successful Login', 'Welcome Boss 🙂');
   }
 
   // toastr error
   showError(m: string) {
-    this.toastr.error(m, 'Login Failed 🙂');
+    this.toastr.error(m, 'Login Failed 😔');
   }
 }
