@@ -1,7 +1,7 @@
 main {
   & {
     display: flex;
-    min-height: calc(100vh - 70px);
+    min-height: calc(100vh - 85px);
   }
   .image {
     & {
@@ -16,19 +16,7 @@ main {
       }
     }
     img {
-      width: 80%;
-      animation: up-down 2.5s ease-in-out infinite;
-    }
-    @keyframes up-down {
-      0% {
-        transform: translateY(-15px);
-      }
-      50% {
-        transform: translateY(0px);
-      }
-      100% {
-        transform: translateY(-15px);
-      }
+      width: 90%;
     }
   }
   .right-side {

@@ -1,12 +1,31 @@
-nav {
+#header {
   & {
-    height: 70px;
+    // height: 85px;
+    padding: 15px 0px;
+    background-color: transparent !important;
+  }
+  .brand {
+    & {
+      font-size: 26px;
+      color: #1a0f91;
+      font-weight: 600;
+    }
+    span {
+      position: relative;
+      bottom: -10px;
+    }
+    img {
+      width: 35px;
+      height: 35px;
+    }
+  }
+  .out {
     display: flex;
     align-items: center;
-  }
-  span {
-    font-size: 24px;
-    color: #1a0f91;
-    font-weight: 600;
+    gap: 10px;
+    cursor: default;
+    background-color: white;
+    border-radius: 20px;
+    padding: 10px 15px;
   }
 }
