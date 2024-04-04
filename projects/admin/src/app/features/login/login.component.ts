@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, effect } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { loginRequest } from './login.models';
@@ -17,7 +17,25 @@ export class loginComponent {
     private toastr: ToastrService,
     private spinner: NgxSpinnerService,
     private router: Router
-  ) {}
+  ) {
+    effect(() => {
+      if (this.authSer.requestFinish()) {
+        this.spinner.hide();
+      }
+    });
+    effect(() => {
+      if (this.authSer.requestError()) {
+        this.showError(this.authSer.requestError());
+      }
+    });
+
+    effect(() => {
+      if (this.authSer.userToken() !== '') {
+        this.showSuccess();
+        this.router.navigate(['/tasks']);
+      }
+    });
+  }
   hide = true;
 
   form = new FormGroup({
@@ -54,18 +72,7 @@ export class loginComponent {
       role: 'admin',
     };
     this.spinner.show();
-    this.authSer.login(data).subscribe(
-      (res) => {
-        localStorage.setItem('token', res.token);
-        this.spinner.hide();
-        this.showSuccess();
-        this.router.navigate(['/tasks']);
-      },
-      (err) => {
-        this.spinner.hide();
-        this.showError(err.error.message);
-      }
-    );
+    this.authSer.login(data);
   }
 
   // toastr success

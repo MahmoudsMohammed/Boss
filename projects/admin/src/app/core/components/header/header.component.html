@@ -4,7 +4,7 @@
       ><img src="../../../../assets/images/logo.png" alt="" />
       <span> El-Boss</span></span
     >
-    @if(true) {
+    @if(loggedIn) {
     <button
       class="navbar-toggler"
       type="button"
@@ -24,6 +24,7 @@
         <a class="nav-link active" aria-current="page">All Tasks</a>
         <a class="nav-link">Users</a>
         <a class="nav-link state"
+        (click)="logout()"
           >LogOut<mat-icon
             aria-hidden="false"
             aria-label="Example logout icon"
@@ -33,13 +34,13 @@
       </div>
     </div>
     }@else {
-    <span class="state"
+    <a class="state" routerLink="/login"
       >LogIn<mat-icon
         aria-hidden="false"
         aria-label="Example login icon"
         fontIcon="login"
       ></mat-icon
-    ></span>
+    ></a>
     }
   </div>
 </nav>
