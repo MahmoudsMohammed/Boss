@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
-import { finalize } from 'rxjs';
+import { finalize, tap } from 'rxjs';
 import { loginRequest, loginResponse } from './login.models';
 
 @Injectable({ providedIn: 'root' })
@@ -13,14 +13,21 @@ export class loginService {
   login(data: loginRequest): void {
     this.http
       .post<loginResponse>('https://manage-mkex.onrender.com/auth/login', data)
-      .pipe(finalize(() => this.requestFinish.set(true)))
+      .pipe(
+        tap(() => {
+          this.requestFinish.set(false);
+          this.requestError.set('');
+        }),
+        finalize(() => this.requestFinish.set(true))
+      )
       .subscribe(
         (res) => {
           localStorage.setItem('token', res.token);
           this.userToken.set(res.token);
         },
         (err) => {
-          this.requestError.set(err.message);
+          console.log(err);
+          this.requestError.set(err.error.message);
         }
       );
   }

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, effect } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, observable } from 'rxjs';
+import { loginService } from '../../../features/login/login.service';
 
 @Component({
   selector: 'app-header',
@@ -9,17 +9,22 @@ import { Observable, observable } from 'rxjs';
 })
 export class headerComponent implements OnInit {
   loggedIn!: boolean;
-  user!: Observable<boolean>;
 
-  constructor(private router: Router) {}
-
-  ngOnInit(): void {
+  constructor(private router: Router, private logServ: loginService) {
+    effect(() => {
+      if (this.logServ.userToken() !== '') {
+        this.loggedIn = true;
+      }
+    });
   }
+
+  ngOnInit(): void {}
 
   // logout function
   logout() {
     localStorage.removeItem('token');
-    this.loggedIn = false;
+    this.logServ.userToken.set('');
     this.router.navigate(['/login']);
+    this.loggedIn = false;
   }
 }

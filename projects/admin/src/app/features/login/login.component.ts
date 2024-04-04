@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
   styleUrl: './login.component.scss',
 })
 export class loginComponent {
+  hide = true;
+
   constructor(
     private authSer: loginService,
     private toastr: ToastrService,
@@ -24,7 +26,7 @@ export class loginComponent {
       }
     });
     effect(() => {
-      if (this.authSer.requestError()) {
+      if (this.authSer.requestError() !== '') {
         this.showError(this.authSer.requestError());
       }
     });
@@ -36,7 +38,6 @@ export class loginComponent {
       }
     });
   }
-  hide = true;
 
   form = new FormGroup({
     email: new FormControl('', [Validators.email, Validators.required]),
