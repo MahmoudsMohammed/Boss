@@ -56,6 +56,7 @@ export class loginComponent {
     this.spinner.show();
     this.authSer.login(data).subscribe(
       (res) => {
+        localStorage.setItem('token', res.token);
         this.spinner.hide();
         this.showSuccess();
         this.router.navigate(['/tasks']);

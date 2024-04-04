@@ -1,6 +1,5 @@
 #header {
   & {
-    // height: 85px;
     padding: 15px 0px;
     background-color: transparent !important;
   }
@@ -19,13 +18,27 @@
       height: 35px;
     }
   }
-  .out {
+  a {
+    font-size: clamp(calc(16rem / 16), 3vw, calc(18rem / 16));
+    cursor: pointer;
+  }
+  .state {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
-    cursor: default;
+    cursor: pointer;
     background-color: white;
     border-radius: 20px;
     padding: 10px 15px;
+  }
+
+  .active {
+    display: block;
+    padding: 10px;
+    background-color: #1a0f91;
+    color: white;
+    font-weight: 500;
+    border-radius: 5px;
   }
 }
