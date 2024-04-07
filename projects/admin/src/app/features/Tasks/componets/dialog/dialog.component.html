@@ -1,6 +1,35 @@
-<h2 mat-dialog-title>Delete file</h2>
-<mat-dialog-content> Would you like to delete cat.jpeg? </mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-button mat-dialog-close>No</button>
-  <button mat-button mat-dialog-close cdkFocusInitial>Ok</button>
-</mat-dialog-actions>
+<div class="dialog">
+  <h2 class="mb-3 text-center">Add New Task</h2>
+  <form>
+    <mat-form-field>
+      <mat-label>Title *</mat-label>
+      <input matInput type="text" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>User *</mat-label>
+      <mat-select>
+        <mat-option value="one">First option</mat-option>
+        <mat-option value="two">Second option</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <input type="file" name="" id="" class="form-control mb-3" />
+    <mat-form-field>
+      <mat-label>Deadline Date *</mat-label>
+      <input matInput [matDatepicker]="picker" />
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Description *</mat-label>
+      <textarea matInput></textarea>
+    </mat-form-field>
+  </form>
+
+  <div class="d-flex justify-content-center gap-3">
+    <button mat-button>Create</button>
+    <button mat-button>Close</button>
+  </div>
+</div>

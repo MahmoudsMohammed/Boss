@@ -4,7 +4,7 @@
       ><img src="../../../../assets/images/logo.png" alt="" />
       <span> El-Boss</span></span
     >
-    @if(loggedIn) {
+    @if(loggedIn()) {
     <button
       class="navbar-toggler"
       type="button"
@@ -17,14 +17,21 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div
-      class="collapse navbar-collapse d-lg-flex justify-content-lg-end mt-md-2"
+      class="collapse navbar-collapse d-lg-flex justify-content-lg-end mt-3 mt-lg-0"
       id="navbarNavAltMarkup"
     >
       <div class="navbar-nav gap-3">
-        <a class="nav-link active" aria-current="page">All Tasks</a>
-        <a class="nav-link">Users</a>
-        <a class="nav-link state"
-        (click)="logout()"
+        <a
+          class="nav-link"
+          aria-current="page"
+          routerLinkActive="active"
+          routerLink="/tasks"
+          >All Tasks</a
+        >
+        <a class="nav-link" routerLinkActive="active" routerLink="/users"
+          >Users</a
+        >
+        <a class="nav-link state" (click)="logout()"
           >LogOut<mat-icon
             aria-hidden="false"
             aria-label="Example logout icon"

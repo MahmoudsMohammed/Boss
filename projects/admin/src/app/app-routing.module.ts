@@ -12,6 +12,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./features/Tasks/Tasks.module').then((m) => m.TasksModule),
   },
+  {
+    path: 'users',
+    loadChildren: () =>
+      import('./features/Users/Users.module').then((m) => m.UsersModule),
+  },
   { path: '**', redirectTo: 'login' },
 ];
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from './componets/dialog/dialog.component';
 
@@ -6,6 +6,7 @@ import { DialogComponent } from './componets/dialog/dialog.component';
   selector: 'app-Tasks',
   templateUrl: './Tasks.component.html',
   styleUrls: ['./Tasks.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TasksComponent {
   constructor(public dialog: MatDialog) {}
@@ -15,7 +16,6 @@ export class TasksComponent {
     exitAnimationDuration: string
   ): void {
     this.dialog.open(DialogComponent, {
-      width: '250px',
       enterAnimationDuration,
       exitAnimationDuration,
     });

@@ -1,0 +1,32 @@
+.dialog {
+  width: calc(600rem / 16);
+  padding: calc(25rem / 16);
+  max-width: 100%;
+  form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: calc(5rem / 16);
+  }
+  textarea {
+    resize: none;
+    height: calc(100rem / 16);
+  }
+  button {
+    padding: calc(5rem / 16) calc(50rem / 16);
+  }
+  button:first-of-type {
+    background-color: #edf2f7;
+    color: #b9b9b9;
+  }
+  button:last-of-type {
+    background-color: #1a0f91;
+    color: white;
+  }
+  .form-control {
+    box-shadow: none;
+    &:focus {
+      border-color: #1a0f91;
+    }
+  }
+}

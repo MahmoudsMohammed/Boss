@@ -8,6 +8,8 @@ import {
   MatDialogActions,
   MatDialogContent,
 } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
   imports: [
@@ -18,6 +20,8 @@ import {
     MatDialogModule,
     MatDialogActions,
     MatDialogContent,
+    MatSelectModule,
+    MatDatepickerModule,
   ],
   exports: [
     MatButtonModule,
@@ -27,6 +31,8 @@ import {
     MatDialogModule,
     MatDialogActions,
     MatDialogContent,
+    MatSelectModule,
+    MatDatepickerModule,
   ],
 })
 export class materialModule {}
