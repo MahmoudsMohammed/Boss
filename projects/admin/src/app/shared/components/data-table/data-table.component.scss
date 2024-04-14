@@ -1,5 +1,11 @@
-.full-width-table {
-  width: 100%;
+@media (max-width: 768px) {
+  .mat-elevation-z8 {
+    overflow-x: scroll;
+  }
+  table,
+  mat-paginator {
+    min-width: 720px;
+  }
 }
 .head {
   background-color: #1a0f91;
