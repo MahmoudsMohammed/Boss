@@ -18,7 +18,10 @@ export class headerComponent implements OnInit {
 
   constructor(private router: Router, private logServ: loginService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // set value of token at signal when refresh the App
+    this.logServ.userToken.set(localStorage.getItem('token'));
+  }
 
   // logout function
   logout() {
