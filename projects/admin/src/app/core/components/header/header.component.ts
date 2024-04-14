@@ -14,9 +14,7 @@ import { loginService } from '../../../features/login/login.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class headerComponent implements OnInit {
-  loggedIn = computed(() => 
-    this.logServ.userToken() !== ''
-  );
+  loggedIn = computed(() => this.logServ.userToken() !== '');
 
   constructor(private router: Router, private logServ: loginService) {}
 
