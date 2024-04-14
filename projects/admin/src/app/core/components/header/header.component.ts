@@ -2,8 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   OnInit,
-  effect,
-  signal,
+  computed,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { loginService } from '../../../features/login/login.service';
@@ -15,15 +14,11 @@ import { loginService } from '../../../features/login/login.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class headerComponent implements OnInit {
-  loggedIn = signal<boolean>(false);
+  loggedIn = computed(() => 
+    this.logServ.userToken() !== ''
+  );
 
-  constructor(private router: Router, private logServ: loginService) {
-    effect(() => {
-      if (this.logServ.userToken() !== '') {
-        this.loggedIn.set(true);
-      }
-    });
-  }
+  constructor(private router: Router, private logServ: loginService) {}
 
   ngOnInit(): void {}
 
@@ -32,6 +27,5 @@ export class headerComponent implements OnInit {
     localStorage.removeItem('token');
     this.logServ.userToken.set('');
     this.router.navigate(['/login']);
-    this.loggedIn.set(false);
   }
 }

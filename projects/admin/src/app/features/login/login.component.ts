@@ -21,19 +21,18 @@ export class loginComponent {
     private spinner: NgxSpinnerService,
     private router: Router
   ) {
-    effect(() => {
-      if (this.authSer.requestFinish()) {
-        this.spinner.hide();
-      }
-    });
+    // if error happen
     effect(() => {
       if (this.authSer.requestError() !== '') {
+        this.spinner.hide();
         this.showError(this.authSer.requestError());
+        this.form.reset();
       }
     });
-
+    // if the request success
     effect(() => {
       if (this.authSer.userToken() !== '') {
+        this.spinner.hide();
         this.showSuccess();
         this.router.navigate(['/tasks']);
       }
