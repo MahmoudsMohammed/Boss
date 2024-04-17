@@ -2,11 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, signal } from '@angular/core';
 import { loginRequest, loginResponse } from './login.models';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({ providedIn: 'any' })
 export class loginService {
   userToken = signal<string>('');
   requestError = signal<string>('');
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    console.log('any');
+  }
 
   login = (data: loginRequest): void => {
     this.requestError.set('');

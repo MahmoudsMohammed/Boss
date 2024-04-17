@@ -12,6 +12,7 @@ import { loginComponent } from './features/login/login.component';
 import { sharedModule } from './shared/shared.module';
 // Import library module
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { tokenInterceptor } from './core/Interceptors/token.interceptor';
 
 @NgModule({
   declarations: [AppComponent, loginComponent],
@@ -26,7 +27,14 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     NgxSpinnerModule.forRoot({ type: 'square-jelly-box' }),
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [provideAnimationsAsync()],
+  providers: [
+    provideAnimationsAsync(),
+    {
+      provide: tokenInterceptor,
+      useClass: tokenInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

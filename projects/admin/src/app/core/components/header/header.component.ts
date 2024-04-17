@@ -20,7 +20,7 @@ export class headerComponent implements OnInit {
 
   ngOnInit(): void {
     // set value of token at signal when refresh the App
-    this.logServ.userToken.set(localStorage.getItem('token'));
+    this.logServ.userToken.set(localStorage.getItem('token') || '');
   }
 
   // logout function
