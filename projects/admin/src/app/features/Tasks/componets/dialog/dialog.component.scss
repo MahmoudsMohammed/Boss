@@ -16,11 +16,11 @@
     padding: calc(5rem / 16) calc(50rem / 16);
   }
   button:first-of-type {
-    background-color: #edf2f7;
-    color: #b9b9b9;
+    background-color: #1a0f91;
+    color: white;
   }
   button:last-of-type {
-    background-color: #1a0f91;
+    background-color: #dc3545;
     color: white;
   }
   .form-control {
@@ -29,4 +29,10 @@
       border-color: #1a0f91;
     }
   }
+}
+
+// helper classes
+.disabled {
+  background-color: #edf2f7 !important;
+  color: #b9b9b9 !important;
 }
