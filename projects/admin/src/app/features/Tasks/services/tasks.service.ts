@@ -17,4 +17,17 @@ export class tasksService {
       }
     );
   }
+
+  addTask(data: FormData) {
+    this.http
+      .post('https://manage-mkex.onrender.com/tasks/add-task', data)
+      .subscribe(
+        (res) => {
+          console.log(res);
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+  }
 }

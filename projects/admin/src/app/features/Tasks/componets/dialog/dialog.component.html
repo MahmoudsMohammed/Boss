@@ -7,13 +7,21 @@
     </mat-form-field>
     <mat-form-field>
       <mat-label>User </mat-label>
-      <mat-select formControlName="user">
+      <mat-select formControlName="userId">
         @for (user of users(); track $index) {
         <mat-option [value]="user._id">{{ user.username }}</mat-option>
         }
       </mat-select>
     </mat-form-field>
-    <input type="file" name="" id="" class="form-control mb-3" />
+    <label for="image">Image *</label>
+    <input
+      type="file"
+      name=""
+      id="image"
+      class="form-control mb-3"
+      accept="image/*"
+      (change)="onFileChange($event)"
+    />
     <mat-form-field>
       <mat-label>Deadline Date </mat-label>
       <input matInput [matDatepicker]="picker" formControlName="deadline" />
