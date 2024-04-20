@@ -11,3 +11,10 @@
   background-color: #1a0f91;
   color: white;
 }
+table {
+  img {
+    width: calc(80rem / 16);
+    height: calc(80rem / 16);
+    padding: calc(10rem / 16) 0;
+  }
+}
