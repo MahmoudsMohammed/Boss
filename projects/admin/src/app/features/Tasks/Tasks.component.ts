@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from './componets/dialog/dialog.component';
+import { tasksService } from './services/tasks.service';
 
 @Component({
   selector: 'app-Tasks',
@@ -9,7 +10,9 @@ import { DialogComponent } from './componets/dialog/dialog.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TasksComponent {
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private tasksService: tasksService) {
+    this.tasksService.getAllTasks();
+  }
 
   openDialog(
     enterAnimationDuration: string,

@@ -1,10 +1,11 @@
 import {
   HttpEvent,
   HttpHandler,
+  HttpHeaders,
   HttpInterceptor,
   HttpRequest,
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 export class tokenInterceptor implements HttpInterceptor {
   intercept(
@@ -12,10 +13,9 @@ export class tokenInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     const clone = req.clone({
-      headers: req.headers.set(
-        'Authorization',
-        `Bearer ${localStorage.getItem('token')}`
-      ),
+      headers: new HttpHeaders({
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      }),
     });
     return next.handle(clone);
   }

@@ -6,9 +6,4 @@
     font-weight: 500;
     padding: calc(10rem / 16) calc(40rem / 16);
   }
-  form {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(calc(250rem / 16), 1fr));
-    column-gap: calc(20rem / 16);
-  }
 }

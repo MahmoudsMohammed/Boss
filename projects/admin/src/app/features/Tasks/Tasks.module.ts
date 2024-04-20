@@ -5,9 +5,10 @@ import { RouterModule } from '@angular/router';
 import { DialogComponent } from './componets/dialog/dialog.component';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { tasksService } from './services/tasks.service';
+import { FilteringComponent } from './componets/filtering/filtering.component';
 
 @NgModule({
-  declarations: [TasksComponent, DialogComponent],
+  declarations: [FilteringComponent, TasksComponent, DialogComponent],
   imports: [
     sharedModule,
     RouterModule.forChild([{ path: '', component: TasksComponent }]),

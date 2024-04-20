@@ -5,7 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { coreModule } from './core/core.module';
 import { loginComponent } from './features/login/login.component';
@@ -30,7 +30,7 @@ import { tokenInterceptor } from './core/Interceptors/token.interceptor';
   providers: [
     provideAnimationsAsync(),
     {
-      provide: tokenInterceptor,
+      provide: HTTP_INTERCEPTORS,
       useClass: tokenInterceptor,
       multi: true,
     },
