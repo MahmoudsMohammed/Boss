@@ -1,21 +1,22 @@
 <div class="dialog">
   <h2 class="mb-3 text-center">Add New Task</h2>
-  <form>
+  <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
     <mat-form-field>
-      <mat-label>Title *</mat-label>
-      <input matInput type="text" />
+      <mat-label>Title </mat-label>
+      <input matInput type="text" formControlName="title" />
     </mat-form-field>
     <mat-form-field>
-      <mat-label>User *</mat-label>
-      <mat-select>
-        <mat-option value="one">First option</mat-option>
-        <mat-option value="two">Second option</mat-option>
+      <mat-label>User </mat-label>
+      <mat-select formControlName="user">
+        @for (user of users(); track $index) {
+        <mat-option [value]="user._id">{{ user.username }}</mat-option>
+        }
       </mat-select>
     </mat-form-field>
     <input type="file" name="" id="" class="form-control mb-3" />
     <mat-form-field>
-      <mat-label>Deadline Date *</mat-label>
-      <input matInput [matDatepicker]="picker" />
+      <mat-label>Deadline Date </mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="deadline" />
       <mat-datepicker-toggle
         matIconSuffix
         [for]="picker"
@@ -23,13 +24,12 @@
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
     <mat-form-field>
-      <mat-label>Description *</mat-label>
-      <textarea matInput></textarea>
+      <mat-label>Description </mat-label>
+      <textarea matInput formControlName="description"></textarea>
     </mat-form-field>
+    <div class="d-flex justify-content-center gap-3">
+      <button mat-button type="submit">Create</button>
+      <button mat-button type="button">Close</button>
+    </div>
   </form>
-
-  <div class="d-flex justify-content-center gap-3">
-    <button mat-button>Create</button>
-    <button mat-button>Close</button>
-  </div>
 </div>

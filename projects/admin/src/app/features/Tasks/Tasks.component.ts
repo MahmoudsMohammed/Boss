@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from './componets/dialog/dialog.component';
 import { tasksService } from './services/tasks.service';
