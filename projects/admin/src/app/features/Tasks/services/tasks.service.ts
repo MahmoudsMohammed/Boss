@@ -42,7 +42,7 @@ export class tasksService {
         },
         (err) => {
           this.spinner.hide();
-          this.toastr.error(err);
+          this.toastr.error(err.error.message);
         }
       );
   }
@@ -70,12 +70,12 @@ export class tasksService {
       )
       .subscribe(
         (res) => {
-          this.spinner.hide();
+          this.getAllTasks();
           this.toastr.success(res.massage);
         },
         (err) => {
           this.spinner.hide();
-          this.toastr.error(err);
+          this.toastr.error(err.name);
         }
       );
   }
