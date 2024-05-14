@@ -1,7 +1,9 @@
 import {
   AfterViewInit,
   Component,
+  EventEmitter,
   OnInit,
+  Output,
   ViewChild,
   effect,
 } from '@angular/core';
@@ -17,6 +19,7 @@ import { tasksDataTable } from '../../model/task.interface';
 })
 export class DataTableComponent implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @Output() updateData = new EventEmitter<tasksDataTable>();
   dataSource = new MatTableDataSource<tasksDataTable>();
 
   constructor(private taskServ: tasksService) {

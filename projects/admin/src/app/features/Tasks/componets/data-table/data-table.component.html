@@ -38,7 +38,12 @@
     <ng-container matColumnDef="Control">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element">
-        <button class="btn btn-warning me-2 text-light">Update</button>
+        <button
+          class="btn btn-warning me-2 text-light"
+          (click)="updateData.emit(element)"
+        >
+          Update
+        </button>
         <button class="btn btn-danger" (click)="deleteTask(element.id)">
           Delete
         </button>
