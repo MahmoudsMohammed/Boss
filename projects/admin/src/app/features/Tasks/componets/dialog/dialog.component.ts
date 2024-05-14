@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  Inject,
   OnInit,
   computed,
   inject,
@@ -8,7 +9,8 @@ import {
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { usersService } from '../../../../core/services/users.service';
 import { tasksService } from '../../services/tasks.service';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { tasksDataTable } from '../../model/task.interface';
 
 @Component({
   selector: 'app-dialog',
@@ -23,7 +25,11 @@ export class DialogComponent implements OnInit {
   );
   dialogRef: MatDialogRef<DialogComponent>;
 
-  constructor(private userSer: usersService, private taskSer: tasksService) {
+  constructor(
+    private userSer: usersService,
+    private taskSer: tasksService,
+    @Inject(MAT_DIALOG_DATA) private data: tasksDataTable
+  ) {
     // call function to get all users and update users signal
     this.userSer.getUsers();
     this.dialogRef = inject(MatDialogRef);
