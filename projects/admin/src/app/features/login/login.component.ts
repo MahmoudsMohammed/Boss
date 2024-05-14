@@ -25,7 +25,6 @@ export class loginComponent {
     effect(() => {
       if (this.authSer.requestError() !== '') {
         this.spinner.hide();
-        this.showError(this.authSer.requestError());
         this.form.reset();
       }
     });
@@ -79,10 +78,5 @@ export class loginComponent {
   // toastr success
   showSuccess() {
     this.toastr.success('Successful Login', 'Welcome Boss 🙂');
-  }
-
-  // toastr error
-  showError(m: string) {
-    this.toastr.error(m, 'Login Failed 😔');
   }
 }

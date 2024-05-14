@@ -13,6 +13,7 @@ import { sharedModule } from './shared/shared.module';
 // Import library module
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { tokenInterceptor } from './core/Interceptors/token.interceptor';
+import { errorInterceptor } from './core/Interceptors/error.interceptor';
 
 @NgModule({
   declarations: [AppComponent, loginComponent],
@@ -32,6 +33,11 @@ import { tokenInterceptor } from './core/Interceptors/token.interceptor';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: tokenInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: errorInterceptor,
       multi: true,
     },
   ],

@@ -3,6 +3,8 @@ import { Injectable, inject, signal } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { Task, tasksDataTable } from '../model/task.interface';
+import { environment } from '../../../../environments/environment.development';
+import { finalize } from 'rxjs';
 
 interface tasksResponse {
   tasks: Task[];
@@ -33,25 +35,22 @@ export class tasksService {
   getAllTasks() {
     this.spinner.show();
     this.http
-      .get<tasksResponse>('https://manage-mkex.onrender.com/tasks/all-tasks')
-      .subscribe(
-        (res) => {
+      .get<tasksResponse>(`${environment.baseAPI}tasks/all-tasks`)
+      .pipe(
+        finalize(() => {
           this.spinner.hide();
-          this.tasks.set(this.mappingResponse(res));
-          console.log(res);
-        },
-        (err) => {
-          this.spinner.hide();
-          this.toastr.error(err.error.message);
-        }
-      );
+        })
+      )
+      .subscribe((res) => {
+        this.tasks.set(this.mappingResponse(res));
+      });
   }
 
   // mapping response for all tasks to get needed data
   mappingResponse(res: tasksResponse) {
     return res.tasks.map((e) => {
       return {
-        Image: 'https://manage-mkex.onrender.com/' + e.image,
+        Image: environment.baseAPI + e.image,
         Title: e.title,
         User: e.userId.username,
         DeadLine: e.deadline,
@@ -64,19 +63,15 @@ export class tasksService {
   addTask(data: FormData) {
     this.spinner.show();
     this.http
-      .post<{ massage: string }>(
-        'https://manage-mkex.onrender.com/tasks/add-task',
-        data
-      )
-      .subscribe(
-        (res) => {
-          this.getAllTasks();
-          this.toastr.success(res.massage);
-        },
-        (err) => {
+      .post<{ massage: string }>(`${environment.baseAPI}tasks/add-task`, data)
+      .pipe(
+        finalize(() => {
           this.spinner.hide();
-          this.toastr.error(err.name);
-        }
-      );
+        })
+      )
+      .subscribe((res) => {
+        this.getAllTasks();
+        this.toastr.success(res.massage);
+      });
   }
 }
