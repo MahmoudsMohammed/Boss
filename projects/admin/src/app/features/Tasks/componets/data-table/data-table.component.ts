@@ -3,7 +3,6 @@ import {
   Component,
   OnInit,
   ViewChild,
-  computed,
   effect,
 } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
@@ -42,5 +41,10 @@ export class DataTableComponent implements AfterViewInit, OnInit {
 
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
+  }
+
+  // delete task
+  deleteTask(id: string) {
+    this.taskServ.deleteTask(id);
   }
 }

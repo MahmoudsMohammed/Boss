@@ -14,6 +14,7 @@ export interface Task {
 }
 
 export interface tasksDataTable {
+  id: string;
   Image: string;
   Title: string;
   User: string;

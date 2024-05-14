@@ -16,6 +16,7 @@ export class tasksService {
   http: HttpClient;
   tasks = signal<tasksDataTable[]>([
     {
+      id: '',
       Image: '',
       Title: '',
       User: '',
@@ -43,6 +44,7 @@ export class tasksService {
       )
       .subscribe((res) => {
         this.tasks.set(this.mappingResponse(res));
+        console.log(this.tasks());
       });
   }
 
@@ -50,6 +52,7 @@ export class tasksService {
   mappingResponse(res: tasksResponse) {
     return res.tasks.map((e) => {
       return {
+        id: e._id,
         Image: environment.baseAPI + e.image,
         Title: e.title,
         User: e.userId.username,
@@ -72,6 +75,21 @@ export class tasksService {
       .subscribe((res) => {
         this.getAllTasks();
         this.toastr.success(res.massage);
+      });
+  }
+
+  // delete task
+  deleteTask(id: string) {
+    this.spinner.show();
+    this.http
+      .delete(`${environment.baseAPI}tasks/delete-task/${id}`)
+      .pipe(
+        finalize(() => {
+          this.spinner.hide();
+        })
+      )
+      .subscribe((res) => {
+        this.getAllTasks();
       });
   }
 }
