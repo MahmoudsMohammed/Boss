@@ -7,10 +7,10 @@ import {
   inject,
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { usersService } from '../../../../core/services/users.service';
 import { tasksService } from '../../services/tasks.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { tasksDataTable } from '../../model/task.interface';
+import { usersService } from '../../../../../core/services/users.service';
 
 @Component({
   selector: 'app-dialog',

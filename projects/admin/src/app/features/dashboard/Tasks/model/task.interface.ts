@@ -1,4 +1,4 @@
-import { user } from '../../../core/model/user.interface';
+import { user } from '../../../../core/model/user.interface';
 
 export interface Task {
   _id: string;

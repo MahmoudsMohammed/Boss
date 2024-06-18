@@ -13,10 +13,9 @@ import { sharedModule } from './shared/shared.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { tokenInterceptor } from './core/Interceptors/token.interceptor';
 import { errorInterceptor } from './core/Interceptors/error.interceptor';
-import { LayoutComponent } from './features/dashboard/layout/layout.component';
 
 @NgModule({
-  declarations: [AppComponent, loginComponent, LayoutComponent],
+  declarations: [AppComponent, loginComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
