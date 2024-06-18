@@ -8,18 +8,6 @@ const routes: Routes = [
     path: 'login',
     component: loginComponent,
   },
-  {
-    path: 'tasks',
-    loadChildren: () =>
-      import('./features/Tasks/Tasks.module').then((m) => m.TasksModule),
-    canActivate: [authGuard],
-  },
-  {
-    path: 'users',
-    loadChildren: () =>
-      import('./features/Users/Users.module').then((m) => m.UsersModule),
-    canActivate: [authGuard],
-  },
   { path: '**', redirectTo: 'login' },
 ];
 

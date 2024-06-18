@@ -7,22 +7,21 @@ import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
-import { coreModule } from './core/core.module';
 import { loginComponent } from './features/login/login.component';
 import { sharedModule } from './shared/shared.module';
 // Import library module
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { tokenInterceptor } from './core/Interceptors/token.interceptor';
 import { errorInterceptor } from './core/Interceptors/error.interceptor';
+import { LayoutComponent } from './features/dashboard/layout/layout.component';
 
 @NgModule({
-  declarations: [AppComponent, loginComponent],
+  declarations: [AppComponent, loginComponent, LayoutComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ToastrModule.forRoot(),
-    coreModule,
     sharedModule,
     BrowserAnimationsModule,
     NgxSpinnerModule.forRoot({ type: 'square-jelly-box' }),

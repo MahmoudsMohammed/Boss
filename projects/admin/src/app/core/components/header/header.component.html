@@ -4,7 +4,6 @@
       ><img src="../../../../assets/images/logo.png" alt="" />
       <span> El-Boss</span></span
     >
-    @if(loggedIn()) {
     <button
       class="navbar-toggler"
       type="button"
@@ -40,14 +39,5 @@
         ></a>
       </div>
     </div>
-    }@else {
-    <a class="state" routerLink="/login"
-      >LogIn<mat-icon
-        aria-hidden="false"
-        aria-label="Example login icon"
-        fontIcon="login"
-      ></mat-icon
-    ></a>
-    }
   </div>
 </nav>
