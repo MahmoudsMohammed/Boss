@@ -14,7 +14,7 @@
             placeholder="pat@example.com"
             formControlName="email"
           />
-          @if (form.get('email').invalid) {
+          @if (form.get('email').invalid && form.get('email').touched) {
           <mat-error>{{ getEmailError() }}</mat-error>
           }
         </mat-form-field>
