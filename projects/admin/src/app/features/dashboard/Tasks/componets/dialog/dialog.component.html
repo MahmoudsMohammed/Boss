@@ -43,7 +43,7 @@
         [disabled]="!taskForm.valid"
         [ngClass]="{ disabled: !taskForm.valid }"
       >
-        Create
+        @if(data){ Update }@else { Create }
       </button>
       <button (click)="dialogRef.close()" mat-button type="button">
         Close

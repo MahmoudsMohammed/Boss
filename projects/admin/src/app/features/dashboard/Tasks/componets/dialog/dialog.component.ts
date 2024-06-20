@@ -28,25 +28,28 @@ export class DialogComponent implements OnInit {
   constructor(
     private userSer: usersService,
     private taskSer: tasksService,
-    @Inject(MAT_DIALOG_DATA) private data: tasksDataTable
+    @Inject(MAT_DIALOG_DATA) public data: tasksDataTable
   ) {
     this.dialogRef = inject(MatDialogRef);
   }
 
   ngOnInit() {
-    console.log(this.data);
+    console.log(this.data?.Title);
     // call function to get all users and update users signal
     this.userSer.getUsers();
     // task form initialization
     this.taskForm = new FormGroup({
-      title: new FormControl('', [
+      title: new FormControl(this.data?.Title || '', [
         Validators.required,
         Validators.minLength(6),
       ]),
-      userId: new FormControl('', Validators.required),
-      description: new FormControl('', Validators.required),
-      deadline: new FormControl('', Validators.required),
-      image: new FormControl(null, Validators.required),
+      userId: new FormControl(this.data?.id || '', Validators.required),
+      description: new FormControl(
+        this.data?.Description || '',
+        Validators.required
+      ),
+      deadline: new FormControl(this.data?.DeadLine || '', Validators.required),
+      image: new FormControl(this.data?.Image || null, Validators.required),
     });
   }
 
