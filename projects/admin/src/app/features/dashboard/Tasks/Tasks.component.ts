@@ -25,7 +25,6 @@ export class TasksComponent {
   }
 
   updateTask(e: tasksDataTable) {
-    console.log(e);
-    // this.openDialog('300ms', '0ms', e);
+    this.openDialog('300ms', '0ms', e);
   }
 }

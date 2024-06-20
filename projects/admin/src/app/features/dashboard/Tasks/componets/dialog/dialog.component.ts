@@ -30,12 +30,13 @@ export class DialogComponent implements OnInit {
     private taskSer: tasksService,
     @Inject(MAT_DIALOG_DATA) private data: tasksDataTable
   ) {
-    // call function to get all users and update users signal
-    this.userSer.getUsers();
     this.dialogRef = inject(MatDialogRef);
   }
 
   ngOnInit() {
+    console.log(this.data);
+    // call function to get all users and update users signal
+    this.userSer.getUsers();
     // task form initialization
     this.taskForm = new FormGroup({
       title: new FormControl('', [

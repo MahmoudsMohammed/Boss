@@ -45,7 +45,6 @@ export class tasksService {
       )
       .subscribe((res) => {
         this.tasks.set(this.mappingResponse(res));
-        console.log(this.tasks());
       });
   }
 
