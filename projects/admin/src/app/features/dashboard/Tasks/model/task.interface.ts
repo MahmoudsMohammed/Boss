@@ -20,4 +20,5 @@ export interface tasksDataTable {
   User: string;
   DeadLine: string;
   Status: string;
+  Description: string;
 }

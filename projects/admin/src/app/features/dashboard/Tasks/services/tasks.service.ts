@@ -22,6 +22,7 @@ export class tasksService {
       User: '',
       DeadLine: '',
       Status: '',
+      Description: '',
     },
   ]);
 
@@ -58,6 +59,7 @@ export class tasksService {
         User: e.userId.username,
         DeadLine: e.deadline,
         Status: e.status,
+        Description: e.description,
       };
     });
   }
