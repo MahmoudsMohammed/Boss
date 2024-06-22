@@ -8,9 +8,14 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { tasksService } from '../../services/tasks.service';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { tasksDataTable } from '../../model/task.interface';
 import { usersService } from '../../../../../core/services/users.service';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-dialog',
@@ -28,6 +33,7 @@ export class DialogComponent implements OnInit {
   constructor(
     private userSer: usersService,
     private taskSer: tasksService,
+    public dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: tasksDataTable
   ) {
     this.dialogRef = inject(MatDialogRef);
@@ -62,6 +68,7 @@ export class DialogComponent implements OnInit {
       .get('image')
       .setValue((e.target as HTMLInputElement).files[0]);
   }
+  // when create or update
   onSubmit() {
     const data = new FormData();
     // loop over form values and set as key and value in form data
@@ -71,5 +78,9 @@ export class DialogComponent implements OnInit {
       }
     );
     this.taskSer.addTask(data);
+  }
+  // when close the dialog
+  onClose() {
+    this.dialog.open(ConfirmDialogComponent);
   }
 }

@@ -45,9 +45,7 @@
       >
         @if(data){ Update }@else { Create }
       </button>
-      <button (click)="dialogRef.close()" mat-button type="button">
-        Close
-      </button>
+      <button (click)="onClose()" mat-button type="button">Close</button>
     </div>
   </form>
 </div>
