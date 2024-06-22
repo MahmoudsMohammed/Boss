@@ -23,6 +23,7 @@ export class tasksService {
       DeadLine: '',
       Status: '',
       Description: '',
+      userId: '',
     },
   ]);
 
@@ -59,6 +60,7 @@ export class tasksService {
         DeadLine: e.deadline,
         Status: e.status,
         Description: e.description,
+        userId: e.userId._id,
       };
     });
   }

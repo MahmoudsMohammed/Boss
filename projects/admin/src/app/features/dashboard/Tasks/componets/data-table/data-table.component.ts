@@ -25,6 +25,7 @@ export class DataTableComponent implements AfterViewInit, OnInit {
   constructor(private taskServ: tasksService) {
     effect(() => {
       this.dataSource.data = this.taskServ.tasks();
+      console.log(this.taskServ.tasks());
     });
   }
 
