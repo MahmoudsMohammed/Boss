@@ -61,7 +61,6 @@ export class loginComponent {
     this.spinner.show();
     this.authSer.login(data).subscribe(
       (res: loginResponse) => {
-        console.log(res.token);
         localStorage.setItem('token', res.token);
         this.spinner.hide();
         this.router.navigate(['/dashboard/tasks']);
