@@ -6,7 +6,17 @@
     are you sure you want to discard your changes ?
   </h3>
   <div class="btns d-flex justify-content-center gap-1">
-    <button class="btn px-4 btn-success text-capitalize">yes</button>
-    <button class="btn px-4 btn-danger text-capitalize">no</button>
+    <button
+      class="btn px-4 btn-success text-capitalize"
+      (click)="dialog.closeAll()"
+    >
+      yes
+    </button>
+    <button
+      class="btn px-4 btn-danger text-capitalize"
+      (click)="dialogRef.close()"
+    >
+      no
+    </button>
   </div>
 </div>

@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-confirm-dialog',
@@ -7,7 +8,10 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConfirmDialogComponent implements OnInit {
-  constructor() {}
+  constructor(
+    public dialog: MatDialog,
+    public dialogRef: MatDialogRef<ConfirmDialogComponent>
+  ) {}
 
   ngOnInit() {}
 }

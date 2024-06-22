@@ -20,6 +20,7 @@ export class TasksComponent {
     this.dialog.open(DialogComponent, {
       enterAnimationDuration,
       exitAnimationDuration,
+      disableClose: true,
       data,
     });
   }

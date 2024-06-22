@@ -81,6 +81,6 @@ export class DialogComponent implements OnInit {
   }
   // when close the dialog
   onClose() {
-    this.dialog.open(ConfirmDialogComponent);
+    this.dialog.open(ConfirmDialogComponent, { disableClose: true });
   }
 }
