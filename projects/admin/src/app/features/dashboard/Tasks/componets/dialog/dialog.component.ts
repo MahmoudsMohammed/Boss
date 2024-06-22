@@ -34,6 +34,7 @@ export class DialogComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.data);
     // call function to get all users and update users signal
     this.userSer.getUsers();
     // task form initialization
@@ -48,7 +49,7 @@ export class DialogComponent implements OnInit {
         Validators.required
       ),
       deadline: new FormControl(
-        this.data?.DeadLine || null,
+        new Date(this.data?.DeadLine) || null,
         Validators.required
       ),
       image: new FormControl(this.data?.Image || null, Validators.required),
