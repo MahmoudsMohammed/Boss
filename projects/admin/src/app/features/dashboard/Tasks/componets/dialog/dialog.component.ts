@@ -78,12 +78,29 @@ export class DialogComponent implements OnInit {
     );
     // update or add passed on there is data passed or not
     if (this.data) {
+      if (this.hasUpdate()) {
+        // console.log(this.data.id);
+        this.taskSer.updateTask(data, this.data.id);
+      }
     } else {
       this.taskSer.addTask(data);
     }
   }
   // when close the dialog
   onClose() {
+    const hasUpdated = this.hasUpdate();
+    // check if hasUpdated or Not
+    if (hasUpdated) {
+      // if updated open confirm dialog
+      this.dialog.open(ConfirmDialogComponent, { disableClose: true });
+    } else {
+      // if not close the dialog
+      this.dialogRef.close();
+    }
+  }
+
+  // hasUpdate function to check if the task data updated or not
+  hasUpdate() {
     let hasUpdated = false;
     Object.keys(this.taskForm.value).forEach((e) => {
       // check if there is pass data
@@ -105,14 +122,6 @@ export class DialogComponent implements OnInit {
         }
       }
     });
-
-    // check if hasUpdated or Not
-    if (hasUpdated) {
-      // if updated open confirm dialog
-      this.dialog.open(ConfirmDialogComponent, { disableClose: true });
-    } else {
-      // if not close the dialog
-      this.dialogRef.close();
-    }
+    return hasUpdated;
   }
 }
