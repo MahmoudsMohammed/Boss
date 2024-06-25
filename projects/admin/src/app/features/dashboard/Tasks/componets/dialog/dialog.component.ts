@@ -45,20 +45,20 @@ export class DialogComponent implements OnInit {
     this.userSer.getUsers();
     // task form initialization
     this.taskForm = new FormGroup({
-      title: new FormControl(this.data?.Title || null, [
+      Title: new FormControl(this.data?.Title || null, [
         Validators.required,
         Validators.minLength(6),
       ]),
       userId: new FormControl(this.data?.userId || null, Validators.required),
-      description: new FormControl(
+      Description: new FormControl(
         this.data?.Description || null,
         Validators.required
       ),
-      deadline: new FormControl(
-        new Date(this.data?.DeadLine) || null,
+      DeadLine: new FormControl(
+        this.data ? new Date(this.data?.DeadLine) : null,
         Validators.required
       ),
-      image: new FormControl(this.data?.Image || null, Validators.required),
+      Image: new FormControl(this.data?.Image || null, Validators.required),
     });
   }
 
@@ -77,10 +77,43 @@ export class DialogComponent implements OnInit {
         data.append(ele[0], ele[1]);
       }
     );
-    this.taskSer.addTask(data);
+    // update or add passed on there is data passed or not
+    if (this.data) {
+    } else {
+      this.taskSer.addTask(data);
+    }
   }
   // when close the dialog
   onClose() {
-    this.dialog.open(ConfirmDialogComponent, { disableClose: true });
+    let hasUpdated = false;
+    Object.keys(this.taskForm.value).forEach((e) => {
+      // check if there is pass data
+      if (this.data) {
+        // check for deadline to compare strings not date object
+        if (e === 'DeadLine') {
+          if (this.data[e] !== String(this.taskForm.value[e])) {
+            hasUpdated = true;
+          }
+        }
+        // other key compare strings
+        else if (this.data[e] !== this.taskForm.value[e]) {
+          hasUpdated = true;
+        }
+      } else {
+        // check if there is no data passed
+        if (this.taskForm.value[e] !== null) {
+          hasUpdated = true;
+        }
+      }
+    });
+
+    // check if hasUpdated or Not
+    if (hasUpdated) {
+      // if updated open confirm dialog
+      this.dialog.open(ConfirmDialogComponent, { disableClose: true });
+    } else {
+      // if not close the dialog
+      this.dialogRef.close();
+    }
   }
 }

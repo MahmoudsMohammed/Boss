@@ -95,4 +95,14 @@ export class tasksService {
         this.getAllTasks();
       });
   }
+
+  // update task
+  updateTask(data: FormData, id: string) {
+    this.spinner.show();
+    this.http
+      .put(`${environment.baseAPI}tasks/edit-task/${id}`, data)
+      .subscribe((res) => {
+        this.getAllTasks();
+      });
+  }
 }

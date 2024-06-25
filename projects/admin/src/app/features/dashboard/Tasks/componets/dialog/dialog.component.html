@@ -3,7 +3,7 @@
   <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
     <mat-form-field>
       <mat-label>Title </mat-label>
-      <input matInput type="text" formControlName="title" />
+      <input matInput type="text" formControlName="Title" />
     </mat-form-field>
     <mat-form-field>
       <mat-label>User </mat-label>
@@ -24,7 +24,7 @@
     />
     <mat-form-field>
       <mat-label>Deadline Date </mat-label>
-      <input matInput [matDatepicker]="picker" formControlName="deadline" />
+      <input matInput [matDatepicker]="picker" formControlName="DeadLine" />
       <mat-datepicker-toggle
         matIconSuffix
         [for]="picker"
@@ -33,7 +33,7 @@
     </mat-form-field>
     <mat-form-field>
       <mat-label>Description </mat-label>
-      <textarea matInput formControlName="description"></textarea>
+      <textarea matInput formControlName="Description"></textarea>
     </mat-form-field>
     <div class="d-flex justify-content-center gap-3">
       <button
