@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject, signal } from '@angular/core';
 import { user } from '../model/user.interface';
+import { map } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class usersService {
@@ -15,8 +16,13 @@ export class usersService {
       .get<{ users: user[]; totalItems: number }>(
         'https://manage-mkex.onrender.com/auth/users'
       )
+      .pipe(
+        map((e) => {
+          return e.users.filter((e) => e.role !== 'admin');
+        })
+      )
       .subscribe((res) => {
-        this.users.set(res.users);
+        this.users.set(res);
       });
   }
 }

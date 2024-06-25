@@ -1,24 +1,25 @@
 <form class="my-3">
   <mat-form-field>
-    <mat-label>Search</mat-label>
+    <mat-label>Title</mat-label>
     <input matInput />
   </mat-form-field>
   <mat-form-field>
-    <mat-label>By User*</mat-label>
+    <mat-label>By User</mat-label>
     <mat-select>
-      <mat-option value="one">First option</mat-option>
-      <mat-option value="two">Second option</mat-option>
+      <ng-container *ngFor="let user of users">
+        <mat-option [value]="user.username">{{ user.username }}</mat-option>
+      </ng-container>
     </mat-select>
   </mat-form-field>
   <mat-form-field>
-    <mat-label>Status*</mat-label>
+    <mat-label>Status</mat-label>
     <mat-select>
-      <mat-option value="one">First option</mat-option>
-      <mat-option value="two">Second option</mat-option>
+      <mat-option value="In-Progress">In-Progress</mat-option>
+      <mat-option value="Completed">Completed</mat-option>
     </mat-select>
   </mat-form-field>
   <mat-form-field>
-    <mat-label>Enter a deadline*</mat-label>
+    <mat-label>Date Range</mat-label>
     <mat-date-range-input [rangePicker]="picker">
       <input matStartDate placeholder="Start date" />
       <input matEndDate placeholder="End date" />

@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { user } from '../../../../../core/model/user.interface';
+import { usersService } from './../../../../../core/services/users.service';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  effect,
+} from '@angular/core';
 
 @Component({
   selector: 'app-filtering',
@@ -6,8 +12,11 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
   styleUrls: ['./filtering.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FilteringComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit() {}
+export class FilteringComponent  {
+  users: user[];
+  constructor(private usersService: usersService) {
+    effect(() => {
+      this.users = this.usersService.users();
+    });
+  }
 }

@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from './componets/dialog/dialog.component';
 import { tasksDataTable } from './model/task.interface';
+import { usersService } from '../../../core/services/users.service';
 
 @Component({
   selector: 'app-Tasks',
@@ -9,8 +10,12 @@ import { tasksDataTable } from './model/task.interface';
   styleUrls: ['./Tasks.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TasksComponent {
-  constructor(public dialog: MatDialog) {}
+export class TasksComponent implements OnInit {
+  constructor(public dialog: MatDialog, private userService: usersService) {}
+
+  ngOnInit(): void {
+    this.userService.getUsers();
+  }
 
   openDialog(
     enterAnimationDuration: string,

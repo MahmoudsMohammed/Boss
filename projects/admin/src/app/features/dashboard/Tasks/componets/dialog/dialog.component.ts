@@ -3,7 +3,6 @@ import {
   Component,
   Inject,
   OnInit,
-  computed,
   inject,
 } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -16,6 +15,7 @@ import {
 import { tasksDataTable } from '../../model/task.interface';
 import { usersService } from '../../../../../core/services/users.service';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { user } from '../../../../../core/model/user.interface';
 
 @Component({
   selector: 'app-dialog',
@@ -25,9 +25,7 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
 })
 export class DialogComponent implements OnInit {
   taskForm: FormGroup;
-  users = computed(() =>
-    this.userSer.users().filter((user) => user.role !== 'admin')
-  );
+  users: user[];
   dialogRef: MatDialogRef<DialogComponent>;
 
   constructor(
@@ -40,8 +38,8 @@ export class DialogComponent implements OnInit {
   }
 
   ngOnInit() {
-    // call function to get all users and update users signal
-    this.userSer.getUsers();
+    // set users from users signal
+    this.users = this.userSer.users();
     // task form initialization
     this.taskForm = new FormGroup({
       title: new FormControl(this.data?.title || null, [
@@ -77,12 +75,9 @@ export class DialogComponent implements OnInit {
       }
     );
     // update or add passed on there is data passed or not
-    if (this.data) {
-      if (this.hasUpdate()) {
-        // console.log(this.data.id);
-        this.taskSer.updateTask(data, this.data.id);
-      }
-    } else {
+    if (this.data && this.hasUpdate()) {
+      this.taskSer.updateTask(data, this.data.id);
+    } else if (!this.data) {
       this.taskSer.addTask(data);
     }
   }
@@ -106,7 +101,7 @@ export class DialogComponent implements OnInit {
       // check if there is pass data
       if (this.data) {
         // check for deadline to compare strings not date object
-        if (e === 'DeadLine') {
+        if (e === 'deadline') {
           if (this.data[e] !== String(this.taskForm.value[e])) {
             hasUpdated = true;
           }
@@ -117,7 +112,7 @@ export class DialogComponent implements OnInit {
         }
       } else {
         // check if there is no data passed
-        if (this.taskForm.value[e] !== null) {
+        if (this.taskForm.value[e]) {
           hasUpdated = true;
         }
       }
