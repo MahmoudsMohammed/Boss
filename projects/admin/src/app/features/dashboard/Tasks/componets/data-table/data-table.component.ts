@@ -24,8 +24,8 @@ export class DataTableComponent implements AfterViewInit, OnInit {
 
   constructor(private taskServ: tasksService) {
     effect(() => {
-      this.dataSource.data = this.taskServ.tasks();
       console.log(this.taskServ.tasks());
+      this.dataSource.data = this.taskServ.tasks();
     });
   }
 
@@ -35,12 +35,12 @@ export class DataTableComponent implements AfterViewInit, OnInit {
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns: string[] = [
-    'Image',
-    'Title',
-    'User',
-    'DeadLine',
-    'Status',
-    'Control',
+    'image',
+    'title',
+    'user',
+    'deadline',
+    'status',
+    'control',
   ];
 
   ngAfterViewInit(): void {

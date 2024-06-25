@@ -40,25 +40,24 @@ export class DialogComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.data);
     // call function to get all users and update users signal
     this.userSer.getUsers();
     // task form initialization
     this.taskForm = new FormGroup({
-      Title: new FormControl(this.data?.Title || null, [
+      title: new FormControl(this.data?.title || null, [
         Validators.required,
         Validators.minLength(6),
       ]),
       userId: new FormControl(this.data?.userId || null, Validators.required),
-      Description: new FormControl(
-        this.data?.Description || null,
+      description: new FormControl(
+        this.data?.description || null,
         Validators.required
       ),
-      DeadLine: new FormControl(
-        this.data ? new Date(this.data?.DeadLine) : null,
+      deadline: new FormControl(
+        this.data ? new Date(this.data?.deadline) : null,
         Validators.required
       ),
-      Image: new FormControl(this.data?.Image || null, Validators.required),
+      image: new FormControl(this.data?.image || null, Validators.required),
     });
   }
 

@@ -15,13 +15,8 @@ export class usersService {
       .get<{ users: user[]; totalItems: number }>(
         'https://manage-mkex.onrender.com/auth/users'
       )
-      .subscribe(
-        (res) => {
-          this.users.set(res.users);
-        },
-        (err) => {
-          console.log(err, 'form users request');
-        }
-      );
+      .subscribe((res) => {
+        this.users.set(res.users);
+      });
   }
 }

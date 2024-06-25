@@ -17,12 +17,12 @@ export class tasksService {
   tasks = signal<tasksDataTable[]>([
     {
       id: '',
-      Image: '',
-      Title: '',
-      User: '',
-      DeadLine: '',
-      Status: '',
-      Description: '',
+      image: '',
+      title: '',
+      user: '',
+      deadline: '',
+      status: '',
+      description: '',
       userId: '',
     },
   ]);
@@ -54,12 +54,12 @@ export class tasksService {
     return res.tasks.map((e) => {
       return {
         id: e._id,
-        Image: environment.baseAPI + e.image,
-        Title: e.title,
-        User: e.userId.username,
-        DeadLine: e.deadline,
-        Status: e.status,
-        Description: e.description,
+        image: environment.baseAPI + e.image,
+        title: e.title,
+        user: e.userId.username,
+        deadline: e.deadline,
+        status: e.status,
+        description: e.description,
         userId: e.userId._id,
       };
     });
@@ -75,10 +75,15 @@ export class tasksService {
           this.spinner.hide();
         })
       )
-      .subscribe((res) => {
-        this.getAllTasks();
-        this.toastr.success(res.massage);
-      });
+      .subscribe(
+        (res) => {
+          this.getAllTasks();
+          this.toastr.success(res.massage);
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
   }
 
   // delete task

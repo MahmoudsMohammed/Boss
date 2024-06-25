@@ -15,11 +15,11 @@ export interface Task {
 
 export interface tasksDataTable {
   id: string;
-  Image: string;
-  Title: string;
-  User: string;
-  DeadLine: string;
-  Status: string;
-  Description: string;
+  image: string;
+  title: string;
+  user: string;
+  deadline: string;
+  status: string;
+  description: string;
   userId: string;
 }
