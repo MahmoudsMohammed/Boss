@@ -33,4 +33,8 @@ export class TasksComponent implements OnInit {
   updateTask(e: tasksDataTable) {
     this.openDialog('300ms', '0ms', e);
   }
+
+  clearFilters() {
+    window.location.reload();
+  }
 }

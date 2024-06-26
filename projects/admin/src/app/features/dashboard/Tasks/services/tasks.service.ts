@@ -91,15 +91,10 @@ export class tasksService {
           this.spinner.hide();
         })
       )
-      .subscribe(
-        (res) => {
-          this.getAllTasks();
-          this.toastr.success(res.massage);
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
+      .subscribe((res) => {
+        this.getAllTasks();
+        this.toastr.success(res.massage);
+      });
   }
 
   // delete task
@@ -114,6 +109,7 @@ export class tasksService {
       )
       .subscribe((res) => {
         this.getAllTasks();
+        this.toastr.success('Task Delete Successfully');
       });
   }
 
@@ -121,9 +117,14 @@ export class tasksService {
   updateTask(data: FormData, id: string) {
     this.spinner.show();
     this.http
-      .put(`${environment.baseAPI}tasks/edit-task/${id}`, data)
+      .put<{ massage: string }>(
+        `${environment.baseAPI}tasks/edit-task/${id}`,
+        data
+      )
       .subscribe((res) => {
         this.getAllTasks();
+        console.log(res);
+        this.toastr.success(res.massage);
       });
   }
 }

@@ -11,6 +11,7 @@ import { ChangeDetectionStrategy, Component, effect } from '@angular/core';
 })
 export class FilteringComponent {
   users: user[];
+  deponesTime;
   filter: {
     status: string;
     toDate: string;
@@ -34,22 +35,43 @@ export class FilteringComponent {
   }
 
   onChange(e: any, type: string) {
+    // store each filter value based on type
     switch (type) {
       case 'keyword':
-        this.filter.keyword = e.target.value;
+        // clear the old time out
+        clearTimeout(this.deponesTime);
+        // start new one
+        this.deponesTime = setTimeout(() => {
+          this.filter.keyword = e.target.value;
+          this.taskService.getAllTasks(this.filter);
+        }, 2000);
         break;
       case 'fromDate':
-        this.filter[type] = e.value.toLocaleDateString('en-GB');
+        this.filter[type] = String(
+          e.value.toLocaleDateString('en-GB')
+        ).replaceAll('/', '-');
+        this.filter.toDate = '';
         break;
       case 'toDate':
         e.value
-          ? (this.filter[type] = e.value.toLocaleDateString('en-GB'))
+          ? (this.filter[type] = String(
+              e.value.toLocaleDateString('en-GB')
+            ).replaceAll('/', '-'))
           : (this.filter[type] = '');
         break;
       default:
         this.filter[type] = e;
         break;
     }
-    this.taskService.getAllTasks(this.filter);
+
+    // for other filter requests
+    if (type !== 'keyword') {
+      if (
+        (this.filter.toDate === '' && this.filter.fromDate === '') ||
+        this.filter.toDate !== ''
+      ) {
+        this.taskService.getAllTasks(this.filter);
+      }
+    }
   }
 }

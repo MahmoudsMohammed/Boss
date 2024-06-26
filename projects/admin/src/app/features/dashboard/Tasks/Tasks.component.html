@@ -3,6 +3,7 @@
     <button mat-raised-button (click)="openDialog('300ms', '0ms')">
       Add Task
     </button>
+    <button mat-raised-button (click)="clearFilters()">Clear Filters</button>
     <app-filtering />
     <app-data-table (updateData)="updateTask($event)" />
   </div>

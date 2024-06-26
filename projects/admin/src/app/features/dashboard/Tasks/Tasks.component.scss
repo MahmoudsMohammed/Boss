@@ -1,9 +1,16 @@
 .tasks {
   padding-bottom: calc(40rem / 16);
   button {
-    background-color: #1a0f91;
-    color: white;
     font-weight: 500;
     padding: calc(10rem / 16) calc(40rem / 16);
+  }
+  button:first-of-type {
+    background-color: #1a0f91;
+    color: white;
+  }
+  button:last-of-type {
+    color: #1a0f91;
+    background-color: white;
+    margin-left: 10px;
   }
 }
