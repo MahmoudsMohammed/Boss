@@ -1,19 +1,19 @@
 <form class="my-3">
   <mat-form-field>
     <mat-label>Title</mat-label>
-    <input matInput />
+    <input matInput (input)="onChange($event, 'keyword')" />
   </mat-form-field>
   <mat-form-field>
     <mat-label>By User</mat-label>
-    <mat-select>
+    <mat-select (valueChange)="onChange($event, 'userId')">
       <ng-container *ngFor="let user of users">
-        <mat-option [value]="user.username">{{ user.username }}</mat-option>
+        <mat-option [value]="user._id">{{ user.username }}</mat-option>
       </ng-container>
     </mat-select>
   </mat-form-field>
   <mat-form-field>
     <mat-label>Status</mat-label>
-    <mat-select>
+    <mat-select (valueChange)="onChange($event, 'status')">
       <mat-option value="In-Progress">In-Progress</mat-option>
       <mat-option value="Completed">Completed</mat-option>
     </mat-select>
@@ -21,8 +21,16 @@
   <mat-form-field>
     <mat-label>Date Range</mat-label>
     <mat-date-range-input [rangePicker]="picker">
-      <input matStartDate placeholder="Start date" />
-      <input matEndDate placeholder="End date" />
+      <input
+        matStartDate
+        placeholder="Start date"
+        (dateChange)="onChange($event, 'fromDate')"
+      />
+      <input
+        matEndDate
+        placeholder="End date"
+        (dateChange)="onChange($event, 'toDate')"
+      />
     </mat-date-range-input>
     <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-date-range-picker #picker></mat-date-range-picker>

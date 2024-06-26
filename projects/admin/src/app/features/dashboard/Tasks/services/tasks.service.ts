@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, inject, signal } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
@@ -35,10 +35,26 @@ export class tasksService {
   }
 
   // get all tasks
-  getAllTasks() {
+  getAllTasks(filter?: {
+    status: string;
+    toDate: string;
+    fromDate: string;
+    userId: string;
+    keyword: string;
+  }) {
+    let params = new HttpParams();
+    if (filter) {
+      Object.entries(filter).forEach(([key, value]) => {
+        value !== '' && value !== null
+          ? (params = params.append(key, value))
+          : '';
+      });
+    }
     this.spinner.show();
     this.http
-      .get<tasksResponse>(`${environment.baseAPI}tasks/all-tasks`)
+      .get<tasksResponse>(`${environment.baseAPI}tasks/all-tasks`, {
+        params: params,
+      })
       .pipe(
         finalize(() => {
           this.spinner.hide();
