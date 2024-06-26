@@ -5,7 +5,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import {
+  HTTP_INTERCEPTORS,
+  HttpClientModule,
+  HttpInterceptor,
+} from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { loginComponent } from './features/login/login.component';
 import { sharedModule } from './shared/shared.module';
@@ -13,6 +17,7 @@ import { sharedModule } from './shared/shared.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { tokenInterceptor } from './core/Interceptors/token.interceptor';
 import { errorInterceptor } from './core/Interceptors/error.interceptor';
+import { spinnerInterceptor } from './core/Interceptors/spinner.interceptor';
 
 @NgModule({
   declarations: [AppComponent, loginComponent],
@@ -28,6 +33,11 @@ import { errorInterceptor } from './core/Interceptors/error.interceptor';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     provideAnimationsAsync(),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: spinnerInterceptor,
+      multi: true,
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: tokenInterceptor,

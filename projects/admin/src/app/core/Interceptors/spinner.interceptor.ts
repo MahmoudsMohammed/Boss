@@ -4,9 +4,11 @@ import {
   HttpInterceptor,
   HttpRequest,
 } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Observable, finalize } from 'rxjs';
 
+@Injectable()
 export class spinnerInterceptor implements HttpInterceptor {
   constructor(private spinner: NgxSpinnerService) {}
   intercept(
