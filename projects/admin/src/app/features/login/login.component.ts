@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { loginRequest, loginResponse } from './login.models';
 import { loginService } from './login.service';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
 
 @Component({
@@ -18,7 +17,6 @@ export class loginComponent {
   constructor(
     private authSer: loginService,
     private toastr: ToastrService,
-    private spinner: NgxSpinnerService,
     private router: Router
   ) {}
 
@@ -57,16 +55,13 @@ export class loginComponent {
       email: this.form.get('email').value,
       password: this.form.get('password').value,
       role: 'admin',
-    };
-    this.spinner.show();
+    }
     this.authSer.login(data).subscribe(
       (res: loginResponse) => {
         localStorage.setItem('token', res.token);
-        this.spinner.hide();
         this.router.navigate(['/dashboard/tasks']);
       },
       (err) => {
-        this.spinner.hide();
         this.form.reset({
           email: null,
           password: null,

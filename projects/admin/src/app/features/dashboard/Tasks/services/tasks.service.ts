@@ -1,9 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable, inject, signal } from '@angular/core';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { Task, tasksDataTable } from '../model/task.interface';
-import { finalize } from 'rxjs';
 import { environment } from '../../../../../environments/environment.development';
 
 interface tasksResponse {
@@ -27,10 +25,7 @@ export class tasksService {
     },
   ]);
 
-  constructor(
-    private toastr: ToastrService,
-    private spinner: NgxSpinnerService
-  ) {
+  constructor(private toastr: ToastrService) {
     this.http = inject(HttpClient);
   }
 
@@ -50,16 +45,10 @@ export class tasksService {
           : '';
       });
     }
-    this.spinner.show();
     this.http
       .get<tasksResponse>(`${environment.baseAPI}tasks/all-tasks`, {
         params: params,
       })
-      .pipe(
-        finalize(() => {
-          this.spinner.hide();
-        })
-      )
       .subscribe((res) => {
         this.tasks.set(this.mappingResponse(res));
       });
@@ -83,14 +72,8 @@ export class tasksService {
 
   // add task function
   addTask(data: FormData) {
-    this.spinner.show();
     this.http
       .post<{ massage: string }>(`${environment.baseAPI}tasks/add-task`, data)
-      .pipe(
-        finalize(() => {
-          this.spinner.hide();
-        })
-      )
       .subscribe((res) => {
         this.getAllTasks();
         this.toastr.success(res.massage);
@@ -99,14 +82,8 @@ export class tasksService {
 
   // delete task
   deleteTask(id: string) {
-    this.spinner.show();
     this.http
       .delete(`${environment.baseAPI}tasks/delete-task/${id}`)
-      .pipe(
-        finalize(() => {
-          this.spinner.hide();
-        })
-      )
       .subscribe((res) => {
         this.getAllTasks();
         this.toastr.success('Task Delete Successfully');
@@ -115,7 +92,6 @@ export class tasksService {
 
   // update task
   updateTask(data: FormData, id: string) {
-    this.spinner.show();
     this.http
       .put<{ massage: string }>(
         `${environment.baseAPI}tasks/edit-task/${id}`,
