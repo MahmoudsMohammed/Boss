@@ -1,9 +1,11 @@
 <section class="tasks">
   <div class="container mt-4">
     <button mat-raised-button (click)="openDialog('300ms', '0ms')">
-      Add Task
+      {{ "tasks.add" | translate }}
     </button>
-    <button mat-raised-button (click)="clearFilters()">Clear Filters</button>
+    <button mat-raised-button (click)="clearFilters()">
+      {{ "tasks.clear" | translate }}
+    </button>
     <app-filtering />
     <app-data-table (updateData)="updateTask($event)" />
   </div>

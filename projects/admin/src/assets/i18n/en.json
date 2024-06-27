@@ -1,0 +1,61 @@
+{
+  "dir": "ltr",
+  "login": {
+    "login": "Login",
+    "email": "Enter your email",
+    "password": "Enter your password",
+    "emailErrors": {
+      "required": "You must enter a value",
+      "notValid": "Not a valid email"
+    },
+    "passwordErrors": {
+      "required": "You must enter a value",
+      "maxlength": "Password Max Length is 40",
+      "minlength": "Password Min Length is 8"
+    }
+  },
+  "tasks": {
+    "add": "Add Task",
+    "clear": "Clear Filters",
+    "dialog": {
+      "head": "Add New Task",
+      "title": "Title",
+      "user": "User",
+      "image": "Image",
+      "deadline": "Deadline Date",
+      "description": "Description",
+      "update": "Update",
+      "create": "Create",
+      "close": "Close"
+    },
+    "table": {
+      "status": "Status",
+      "delete": "Delete"
+    },
+    "filter": {
+      "progress": "In-Progress",
+      "complete": "Completed",
+      "range": "Date Range",
+      "start": "Start date",
+      "end": "End date"
+    },
+    "confirmDialog": {
+      "head": "are you sure you want to discard your changes ?",
+      "yes": "yes",
+      "no": "no"
+    }
+  },
+  "header": {
+    "site": " El-Boss",
+    "all": "All Tasks",
+    "users": "Users",
+    "out": "LogOut"
+  },
+  "toaster": {
+    "login": "Successful Login",
+    "deleteTask": "Task Delete Successfully",
+    "updateTask": "Task Update Successfully",
+    "addTask": "Task Added Successfully"
+  },
+  "common": {}
+}

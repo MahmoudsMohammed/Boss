@@ -7,6 +7,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { coreModule } from '../core/core.module';
 import { RouterOutlet } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { RouterOutlet } from '@angular/router';
     MatSortModule,
     coreModule,
     RouterOutlet,
+    TranslateModule,
   ],
-  exports: [materialModule, CommonModule, ReactiveFormsModule],
+  exports: [materialModule, CommonModule, ReactiveFormsModule, TranslateModule],
 })
 export class sharedModule {}

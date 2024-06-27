@@ -3,6 +3,7 @@ import { Injectable, inject, signal } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Task, tasksDataTable } from '../model/task.interface';
 import { environment } from '../../../../../environments/environment.development';
+import { TranslateService } from '@ngx-translate/core';
 
 interface tasksResponse {
   tasks: Task[];
@@ -25,7 +26,10 @@ export class tasksService {
     },
   ]);
 
-  constructor(private toastr: ToastrService) {
+  constructor(
+    private toastr: ToastrService,
+    private translateService: TranslateService
+  ) {
     this.http = inject(HttpClient);
   }
 
@@ -76,7 +80,7 @@ export class tasksService {
       .post<{ massage: string }>(`${environment.baseAPI}tasks/add-task`, data)
       .subscribe((res) => {
         this.getAllTasks();
-        this.toastr.success(res.massage);
+        this.toastr.success(this.translateService.instant('toaster.addTask'));
       });
   }
 
@@ -86,7 +90,9 @@ export class tasksService {
       .delete(`${environment.baseAPI}tasks/delete-task/${id}`)
       .subscribe((res) => {
         this.getAllTasks();
-        this.toastr.success('Task Delete Successfully');
+        this.toastr.success(
+          this.translateService.instant('toaster.deleteTask')
+        );
       });
   }
 
@@ -100,7 +106,9 @@ export class tasksService {
       .subscribe((res) => {
         this.getAllTasks();
         console.log(res);
-        this.toastr.success(res.massage);
+        this.toastr.success(
+          this.translateService.instant('toaster.updateTask')
+        );
       });
   }
 }

@@ -1,10 +1,10 @@
 <form class="my-3">
   <mat-form-field>
-    <mat-label>Title</mat-label>
+    <mat-label>{{ "tasks.dialog.title" | translate }}</mat-label>
     <input matInput (input)="onChange($event, 'keyword')" />
   </mat-form-field>
   <mat-form-field>
-    <mat-label>By User</mat-label>
+    <mat-label>{{ "tasks.dialog.user" | translate }}</mat-label>
     <mat-select (valueChange)="onChange($event, 'userId')">
       <ng-container *ngFor="let user of users">
         <mat-option [value]="user._id">{{ user.username }}</mat-option>
@@ -12,23 +12,27 @@
     </mat-select>
   </mat-form-field>
   <mat-form-field>
-    <mat-label>Status</mat-label>
+    <mat-label>{{ "tasks.table.status" | translate }}</mat-label>
     <mat-select (valueChange)="onChange($event, 'status')">
-      <mat-option value="In-Progress">In-Progress</mat-option>
-      <mat-option value="Completed">Completed</mat-option>
+      <mat-option value="In-Progress">{{
+        "tasks.filter.progress" | translate
+      }}</mat-option>
+      <mat-option value="Completed">{{
+        "tasks.filter.complete" | translate
+      }}</mat-option>
     </mat-select>
   </mat-form-field>
   <mat-form-field>
-    <mat-label>Date Range</mat-label>
+    <mat-label>{{ "tasks.filter.range" | translate }}</mat-label>
     <mat-date-range-input [rangePicker]="picker">
       <input
         matStartDate
-        placeholder="Start date"
+        placeholder="'tasks.filter.start' | translate"
         (dateChange)="onChange($event, 'fromDate')"
       />
       <input
         matEndDate
-        placeholder="End date"
+        [placeholder]="'tasks.filter.end' | translate"
         (dateChange)="onChange($event, 'toDate')"
       />
     </mat-date-range-input>

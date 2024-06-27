@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from './componets/dialog/dialog.component';
 import { tasksDataTable } from './model/task.interface';
 import { usersService } from '../../../core/services/users.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-Tasks',
@@ -11,7 +12,11 @@ import { usersService } from '../../../core/services/users.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TasksComponent implements OnInit {
-  constructor(public dialog: MatDialog, private userService: usersService) {}
+  constructor(
+    public dialog: MatDialog,
+    private userService: usersService,
+    private translateService: TranslateService
+  ) {}
 
   ngOnInit(): void {
     this.userService.getUsers();

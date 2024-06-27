@@ -1,19 +1,19 @@
 <div class="dialog">
-  <h2 class="mb-3 text-center">Add New Task</h2>
+  <h2 class="mb-3 text-center">{{ "tasks.dialog.head" | translate }}</h2>
   <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
     <mat-form-field>
-      <mat-label>Title </mat-label>
+      <mat-label>{{ "tasks.dialog.title" | translate }} </mat-label>
       <input matInput type="text" formControlName="title" />
     </mat-form-field>
     <mat-form-field>
-      <mat-label>User </mat-label>
+      <mat-label>{{ "tasks.dialog.user" | translate }} </mat-label>
       <mat-select formControlName="userId">
         @for (user of users; track $index) {
         <mat-option [value]="user._id">{{ user.username }}</mat-option>
         }
       </mat-select>
     </mat-form-field>
-    <label for="image">Image *</label>
+    <label for="image">{{ "tasks.dialog.image" | translate }}</label>
     <input
       type="file"
       name=""
@@ -23,7 +23,7 @@
       (change)="onFileChange($event)"
     />
     <mat-form-field>
-      <mat-label>Deadline Date </mat-label>
+      <mat-label>{{ "tasks.dialog.deadline" | translate }} </mat-label>
       <input matInput [matDatepicker]="picker" formControlName="deadline" />
       <mat-datepicker-toggle
         matIconSuffix
@@ -32,7 +32,7 @@
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
     <mat-form-field>
-      <mat-label>Description </mat-label>
+      <mat-label>{{ "tasks.dialog.description" | translate }} </mat-label>
       <textarea matInput formControlName="description"></textarea>
     </mat-form-field>
     <div class="d-flex justify-content-center gap-3">
@@ -43,9 +43,12 @@
         [disabled]="!taskForm.valid"
         [ngClass]="{ disabled: !taskForm.valid }"
       >
-        @if(data){ Update }@else { Create }
+        @if(data){ {{ "tasks.dialog.update" | translate }} }@else {
+        {{ "tasks.dialog.create" | translate }} }
       </button>
-      <button (click)="onClose()" mat-button type="button">Close</button>
+      <button (click)="onClose()" mat-button type="button">
+        {{ "tasks.dialog.close" | translate }}
+      </button>
     </div>
   </form>
 </div>

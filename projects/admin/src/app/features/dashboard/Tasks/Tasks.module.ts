@@ -9,6 +9,7 @@ import { DataTableComponent } from './componets/data-table/data-table.component'
 import { DatePipe } from '@angular/common';
 import { sharedModule } from '../../../shared/shared.module';
 import { DialogComponent } from './componets/dialog/dialog.component';
+import { ConfirmDialogComponent } from './componets/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { DialogComponent } from './componets/dialog/dialog.component';
     TasksComponent,
     DataTableComponent,
     DialogComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
     sharedModule,

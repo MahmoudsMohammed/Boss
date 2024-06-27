@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { loginRequest, loginResponse } from './login.models';
 import { loginService } from './login.service';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class loginComponent {
   constructor(
     private authSer: loginService,
     private toastr: ToastrService,
-    private router: Router
+    private router: Router,
+    private translateService: TranslateService
   ) {}
 
   form = new FormGroup({
@@ -32,19 +34,21 @@ export class loginComponent {
   // return error messages based on the error
   getEmailError() {
     if (this.form.get('email').hasError('required')) {
-      return 'You must enter a value';
+      return this.translateService.instant('login.emailErrors.required');
     }
-    return this.form.get('email').hasError('email') ? 'Not a valid email' : '';
+    return this.form.get('email').hasError('email')
+      ? this.translateService.instant('login.emailErrors.notValid')
+      : '';
   }
 
   // return error messages based on the error
   getPasswordError() {
     if (this.form.get('password').hasError('required')) {
-      return 'You must enter a value';
+      return this.translateService.instant('login.passwordErrors.required');
     } else if (this.form.get('password').hasError('maxlength')) {
-      return 'Password Max Length is 40';
+      return this.translateService.instant('login.passwordErrors.maxlength');
     } else {
-      return 'Password Min Length is 8';
+      return this.translateService.instant('login.passwordErrors.minlength');
     }
   }
 
@@ -55,7 +59,7 @@ export class loginComponent {
       email: this.form.get('email').value,
       password: this.form.get('password').value,
       role: 'admin',
-    }
+    };
     this.authSer.login(data).subscribe(
       (res: loginResponse) => {
         localStorage.setItem('token', res.token);
@@ -72,6 +76,6 @@ export class loginComponent {
 
   // toastr success
   showSuccess() {
-    this.toastr.success('Successful Login', 'Welcome Boss 🙂');
+    this.toastr.success(this.translateService.instant('toaster.login'));
   }
 }

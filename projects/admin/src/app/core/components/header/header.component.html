@@ -2,7 +2,7 @@
   <div class="container d-flex align-items-center">
     <span class="navbar-brand brand p-0"
       ><img src="../../../../assets/images/logo.png" alt="" />
-      <span> El-Boss</span></span
+      <span>{{ "header.site" | translate }}</span></span
     >
     <button
       class="navbar-toggler"
@@ -25,16 +25,17 @@
           aria-current="page"
           routerLinkActive="active"
           routerLink="/dashboard/tasks"
-          >All Tasks</a
+          >{{ "header.all" | translate }}</a
         >
         <a
           class="nav-link"
           routerLinkActive="active"
           routerLink="/dashboard/users"
-          >Users</a
+          >{{ "header.users" | translate }}</a
         >
         <a class="nav-link state" (click)="logout()"
-          >LogOut<mat-icon
+          >{{ "header.out" | translate
+          }}<mat-icon
             aria-hidden="false"
             aria-label="Example logout icon"
             fontIcon="logout"
