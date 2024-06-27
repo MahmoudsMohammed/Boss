@@ -48,15 +48,17 @@
     <ng-container matColumnDef="control">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element">
-        <button
-          class="btn btn-warning me-2 text-light"
-          (click)="updateData.emit(element)"
-        >
-          {{ "tasks.dialog.update" | translate }}
-        </button>
-        <button class="btn btn-danger" (click)="deleteTask(element.id)">
-          {{ "tasks.table.delete" | translate }}
-        </button>
+        <div class="d-flex gap-3">
+          <button
+            class="btn btn-warning me-2 text-light"
+            (click)="updateData.emit(element)"
+          >
+            {{ "tasks.dialog.update" | translate }}
+          </button>
+          <button class="btn btn-danger" (click)="deleteTask(element.id)">
+            {{ "tasks.table.delete" | translate }}
+          </button>
+        </div>
       </td>
     </ng-container>
 

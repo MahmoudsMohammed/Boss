@@ -45,7 +45,7 @@
     }
   },
   "header": {
-    "site": " El-Boss",
+    "site": " EL-Boss",
     "all": "All Tasks",
     "users": "Users",
     "out": "LogOut"
@@ -56,5 +56,7 @@
     "updateTask": "Task Update Successfully",
     "addTask": "Task Added Successfully"
   },
-  "common": {}
+  "common": {
+    "spinner": "Loading"
+  }
 }

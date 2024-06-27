@@ -27,7 +27,7 @@
     <mat-date-range-input [rangePicker]="picker">
       <input
         matStartDate
-        placeholder="'tasks.filter.start' | translate"
+        [placeholder]="'tasks.filter.start' | translate"
         (dateChange)="onChange($event, 'fromDate')"
       />
       <input

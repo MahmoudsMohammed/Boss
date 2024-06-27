@@ -1,11 +1,13 @@
 <section class="tasks">
   <div class="container mt-4">
-    <button mat-raised-button (click)="openDialog('300ms', '0ms')">
-      {{ "tasks.add" | translate }}
-    </button>
-    <button mat-raised-button (click)="clearFilters()">
-      {{ "tasks.clear" | translate }}
-    </button>
+    <div class="d-flex gap-3">
+      <button mat-raised-button (click)="openDialog('300ms', '0ms')">
+        {{ "tasks.add" | translate }}
+      </button>
+      <button mat-raised-button (click)="clearFilters()">
+        {{ "tasks.clear" | translate }}
+      </button>
+    </div>
     <app-filtering />
     <app-data-table (updateData)="updateTask($event)" />
   </div>
