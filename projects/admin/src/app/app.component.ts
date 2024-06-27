@@ -11,6 +11,8 @@ export class AppComponent implements OnInit {
   translateService = inject(TranslateService);
   renderer2 = inject(Renderer2);
   ngOnInit(): void {
+    // when the app load translate use the LS language
+    // change the body direction based on the LS language
     if ('lang' in localStorage) {
       localStorage.getItem('lang') === 'en'
         ? this.renderer2.setAttribute(document.body, 'dir', 'ltr')
