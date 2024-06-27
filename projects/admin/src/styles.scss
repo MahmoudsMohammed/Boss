@@ -42,11 +42,15 @@ body {
 }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: Roboto, "Helvetica Neue", sans-serif !important;
   background-color: #edf2f7;
+}
+
+body[dir="rtl"] {
+  font-family: "Cairo", sans-serif !important;
 }
 
 * {
   box-sizing: border-box;
-  --main-color:
+  --main-color: ;
 }
