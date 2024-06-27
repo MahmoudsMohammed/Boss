@@ -5,9 +5,9 @@
   }
   .brand {
     & {
-      font-size: 26px;
+      font-size: clamp(1.25rem, 1.163rem + 0.4348vi, 1.5rem);
       color: #1a0f91;
-      font-weight: 600;
+      font-weight: 500;
     }
     span {
       position: relative;
@@ -19,7 +19,7 @@
     }
   }
   a {
-    font-size: clamp(calc(16rem / 16), 3vw, calc(18rem / 16));
+    font-size: clamp(1rem, 0.9565rem + 0.2174vi, 1.125rem);
     cursor: pointer;
     transition: 0.3s ease-in-out;
   }
@@ -45,6 +45,13 @@
     padding: 10px 15px;
     background-color: #1a0f91;
     color: white;
-    border-radius: 36px;
+    border-radius: 10px;
+  }
+  .language {
+    text-decoration: none;
+    color: black;
+    display: flex;
+    align-items: center;
+    gap: calc(5rem / 16);
   }
 }
