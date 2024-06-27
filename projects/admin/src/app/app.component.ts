@@ -18,6 +18,8 @@ export class AppComponent implements OnInit {
         ? this.renderer2.setAttribute(document.body, 'dir', 'ltr')
         : this.renderer2.setAttribute(document.body, 'dir', 'rtl');
       this.translateService.use(localStorage.getItem('lang'));
+    } else {
+      this.translateService.use('en');
     }
   }
 }
