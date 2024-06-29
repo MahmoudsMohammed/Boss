@@ -1,4 +1,4 @@
-<form [formGroup]="userLoginForm">
+<form [formGroup]="userLoginForm" class="d-flex flex-column gap-3">
   <mat-form-field>
     <mat-label>Enter your email</mat-label>
     <input
@@ -33,4 +33,6 @@
     <mat-error>{{ passwordError() }}</mat-error>
     }
   </mat-form-field>
+  <button>Login</button>
 </form>
+<p>Create new account ? <a>Sign-Up</a></p>

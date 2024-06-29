@@ -54,9 +54,9 @@ export class LoginComponent implements OnInit {
   }
 
   updatePasswordErrorMessage() {
-    if (this.userLoginForm.get('email').hasError('required')) {
+    if (this.userLoginForm.get('password').hasError('required')) {
       this.passwordError.set('Password is Required');
-    } else if (this.userLoginForm.get('email').hasError('minLength')) {
+    } else if (this.userLoginForm.get('password').hasError('minLength')) {
       this.passwordError.set('Password min length is 8 letters');
     }
   }
