@@ -1,20 +1,25 @@
-<form>
+<form [formGroup]="userLoginForm">
   <mat-form-field>
     <mat-label>Enter your email</mat-label>
     <input
       matInput
       placeholder="pat@example.com"
-      [formControl]="email"
-      (blur)="updateErrorMessage()"
+      formControlName="email"
+      (blur)="updateEmailErrorMessage()"
       required
     />
-    @if (email.invalid) {
-    <mat-error>{{ errorMessage() }}</mat-error>
+    @if (userLoginForm.get('email').invalid) {
+    <mat-error>{{ emailError() }}</mat-error>
     }
   </mat-form-field>
   <mat-form-field>
     <mat-label>Enter your password</mat-label>
-    <input matInput [type]="hide() ? 'password' : 'text'" />
+    <input
+      matInput
+      formControlName="password"
+      (blur)="updatePasswordErrorMessage()"
+      [type]="hide() ? 'password' : 'text'"
+    />
     <button
       mat-icon-button
       matSuffix
@@ -24,12 +29,8 @@
     >
       <mat-icon>{{ hide() ? "visibility_off" : "visibility" }}</mat-icon>
     </button>
-  </mat-form-field>
-
-  <mat-form-field floatLabel="always">
-    <mat-label>Amount</mat-label>
-    <input matInput type="number" class="example-right-align" placeholder="0" />
-    <span matTextPrefix>$&nbsp;</span>
-    <span matTextSuffix>.00</span>
+    @if (userLoginForm.get('password').invalid) {
+    <mat-error>{{ passwordError() }}</mat-error>
+    }
   </mat-form-field>
 </form>
