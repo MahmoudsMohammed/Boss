@@ -1,4 +1,8 @@
-<form [formGroup]="userLoginForm" class="d-flex flex-column gap-3">
+<form
+  [formGroup]="userLoginForm"
+  class="d-flex flex-column gap-3"
+  (ngSubmit)="onSubmit()"
+>
   <mat-form-field>
     <mat-label>Enter your email</mat-label>
     <input
@@ -33,6 +37,6 @@
     <mat-error>{{ passwordError() }}</mat-error>
     }
   </mat-form-field>
-  <button>Login</button>
+  <button type="submit">Login</button>
 </form>
 <p>Create new account ? <a>Sign-Up</a></p>
