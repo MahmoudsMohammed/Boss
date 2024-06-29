@@ -1,3 +1,66 @@
-<p>
-  register works!
-</p>
+<form [formGroup]="createUserForm" class="d-flex flex-column gap-3">
+  <mat-form-field>
+    <mat-label>Input</mat-label>
+    <input matInput formGroupName="user" (blur)="updateUserError()" />
+    @if (createUserForm.get('user').invalid) {
+    <mat-error>{{ userError() }}</mat-error>
+    }
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Enter your email</mat-label>
+    <input
+      matInput
+      placeholder="pat@example.com"
+      formGroupName="email"
+      (blur)="updateEmailError()"
+      required
+    />
+    @if (createUserForm.get('email').invalid) {
+    <mat-error>{{ emailError() }}</mat-error>
+    }
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Enter your password</mat-label>
+    <input
+      formControlName="password"
+      matInput
+      (blur)="updatePasswordError()"
+      [type]="hide() ? 'password' : 'text'"
+    />
+    <button
+      mat-icon-button
+      matSuffix
+      (click)="hide.set(!this.hide)"
+      [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="hide()"
+    >
+      <mat-icon>{{ hide() ? "visibility_off" : "visibility" }}</mat-icon>
+    </button>
+    @if (createUserForm.get('password').invalid) {
+    <mat-error>{{ passwordError() }}</mat-error>
+    }
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Confirm password</mat-label>
+    <input
+      formControlName="confirm"
+      matInput
+      (blur)="updateConfirmError()"
+      [type]="hideConfirm() ? 'password' : 'text'"
+    />
+    <button
+      mat-icon-button
+      matSuffix
+      (click)="hideConfirm.set(!this.hideConfirm)"
+      [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="hideConfirm()"
+    >
+      <mat-icon>{{ hideConfirm() ? "visibility_off" : "visibility" }}</mat-icon>
+    </button>
+    @if (createUserForm.get('confirm').invalid) {
+    <mat-error>{{ confirmError() }}</mat-error>
+    }
+  </mat-form-field>
+  <button type="submit">Create Account</button>
+</form>
+<p>Already have an account <a>Sign-In</a></p>
