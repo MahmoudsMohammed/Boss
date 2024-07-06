@@ -57,9 +57,7 @@
     >
       <mat-icon>{{ hideConfirm() ? "visibility_off" : "visibility" }}</mat-icon>
     </button>
-    @if (createUserForm.get('confirm').invalid) {
     <mat-error>{{ confirmError() }}</mat-error>
-    }
   </mat-form-field>
   <button type="submit" [disabled]="createUserForm.invalid">
     Create Account

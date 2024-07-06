@@ -5,9 +5,11 @@ import {
   signal,
 } from '@angular/core';
 import {
+  AbstractControl,
   FormControl,
   FormGroup,
   ReactiveFormsModule,
+  ValidatorFn,
   Validators,
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -48,8 +50,16 @@ export class RegisterComponent implements OnInit {
         Validators.required,
         Validators.minLength(8),
       ]),
-      confirm: new FormControl('', Validators.required),
+      confirm: new FormControl(''),
     });
+
+    // set validation for confirm password
+    this.createUserForm
+      .get('confirm')
+      .setValidators([
+        Validators.required,
+        this.matchValidator(this.createUserForm.value['password']),
+      ]);
   }
 
   updateUserError() {
@@ -75,8 +85,21 @@ export class RegisterComponent implements OnInit {
   }
 
   updateConfirmError() {
+    console.log(this.createUserForm.get('confirm').hasError('notMatch'));
     if (this.createUserForm.get('confirm').hasError('required')) {
-      this.passwordError.set('Please confirm password');
+      this.confirmError.set('Please confirm password');
+    } else if (this.createUserForm.get('confirm').hasError('notMatch')) {
+      this.confirmError.set('Password not Match');
     }
+    console.log(this.confirmError());
+  }
+
+  matchValidator(password: string): ValidatorFn {
+    return (control: AbstractControl): { [e: string]: boolean } | null => {
+      if (password !== control.value) {
+        return { notMatch: true };
+      }
+      return null;
+    };
   }
 }
