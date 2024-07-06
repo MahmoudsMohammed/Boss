@@ -8,5 +8,12 @@ export const routes: Routes = [
         (e) => e.routes
       ),
   },
+  {
+    path: 'allTasks',
+    loadChildren: () =>
+      import('./features/all-tasks/all-tasks.routing').then(
+        (m) => m.allTasksRouting
+      ),
+  },
   { path: '**', redirectTo: 'auth/login', pathMatch: 'full' },
 ];
