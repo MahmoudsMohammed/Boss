@@ -14,6 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -25,6 +26,7 @@ import { MatInputModule } from '@angular/material/input';
     MatButtonModule,
     MatIconModule,
     ReactiveFormsModule,
+    RouterLink,
   ],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -67,7 +69,7 @@ export class RegisterComponent implements OnInit {
   updatePasswordError() {
     if (this.createUserForm.get('password').hasError('required')) {
       this.passwordError.set('Password is Required');
-    } else if (this.createUserForm.get('password').hasError('minLength')) {
+    } else if (this.createUserForm.get('password').hasError('minlength')) {
       this.passwordError.set('Password min length is 8 letters');
     }
   }

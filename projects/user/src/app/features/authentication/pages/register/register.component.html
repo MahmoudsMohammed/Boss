@@ -1,7 +1,7 @@
 <form [formGroup]="createUserForm" class="d-flex flex-column gap-3">
   <mat-form-field>
-    <mat-label>Input</mat-label>
-    <input matInput formGroupName="user" (blur)="updateUserError()" />
+    <mat-label>Username</mat-label>
+    <input matInput formControlName="user" (blur)="updateUserError()" />
     @if (createUserForm.get('user').invalid) {
     <mat-error>{{ userError() }}</mat-error>
     }
@@ -11,7 +11,7 @@
     <input
       matInput
       placeholder="pat@example.com"
-      formGroupName="email"
+      formControlName="email"
       (blur)="updateEmailError()"
       required
     />
@@ -61,6 +61,8 @@
     <mat-error>{{ confirmError() }}</mat-error>
     }
   </mat-form-field>
-  <button type="submit">Create Account</button>
+  <button type="submit" [disabled]="createUserForm.invalid">
+    Create Account
+  </button>
 </form>
-<p>Already have an account <a>Sign-In</a></p>
+<p>Already have an account <a routerLink="/auth/login">Sign-In</a></p>

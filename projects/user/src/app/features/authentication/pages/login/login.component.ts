@@ -17,6 +17,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { AuthenticationService } from '../../services/authentication.service';
 import { loginRequest } from '../../models/authentication';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -29,6 +30,7 @@ import { loginRequest } from '../../models/authentication';
     MatButtonModule,
     MatIconModule,
     ReactiveFormsModule,
+    RouterLink,
   ],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush,
