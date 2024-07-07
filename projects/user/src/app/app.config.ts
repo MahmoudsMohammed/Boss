@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
 import { spinnerInterceptor } from './core/Interceptors/spinner.interceptor';
+import { errorInterceptor } from './core/Interceptors/error.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -21,6 +22,11 @@ export const appConfig: ApplicationConfig = {
     {
       provide: HTTP_INTERCEPTORS,
       useClass: spinnerInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: errorInterceptor,
       multi: true,
     },
   ],
