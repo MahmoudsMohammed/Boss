@@ -10,3 +10,8 @@ export interface registerRequest {
   username: string;
   role: string;
 }
+
+export interface registerResponse {
+  userId: string;
+  token: string;
+}

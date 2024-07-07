@@ -1,8 +1,12 @@
-<form [formGroup]="createUserForm" class="d-flex flex-column gap-3">
+<form
+  [formGroup]="createUserForm"
+  class="d-flex flex-column gap-3"
+  (ngSubmit)="onSubmit()"
+>
   <mat-form-field>
     <mat-label>Username</mat-label>
-    <input matInput formControlName="user" (blur)="updateUserError()" />
-    @if (createUserForm.get('user').invalid) {
+    <input matInput formControlName="username" (blur)="updateUserError()" />
+    @if (createUserForm.get('username').invalid) {
     <mat-error>{{ userError() }}</mat-error>
     }
   </mat-form-field>
@@ -57,7 +61,11 @@
     >
       <mat-icon>{{ hideConfirm() ? "visibility_off" : "visibility" }}</mat-icon>
     </button>
+    @if(createUserForm.get('confirm').hasError('required') ||
+    createUserForm.get('confirm').hasError('notMatch')){
+
     <mat-error>{{ confirmError() }}</mat-error>
+    }
   </mat-form-field>
   <button type="submit" [disabled]="createUserForm.invalid">
     Create Account

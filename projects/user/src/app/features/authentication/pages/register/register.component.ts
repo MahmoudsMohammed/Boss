@@ -1,6 +1,11 @@
 import {
+  registerRequest,
+  registerResponse,
+} from './../../models/authentication';
+import {
   ChangeDetectionStrategy,
   Component,
+  inject,
   OnInit,
   signal,
 } from '@angular/core';
@@ -16,12 +21,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
+  providers: [AuthenticationService],
   imports: [
     MatFormFieldModule,
     MatInputModule,
@@ -42,9 +49,13 @@ export class RegisterComponent implements OnInit {
   confirmError = signal<string>('');
   createUserForm: FormGroup;
 
+  // start injection
+  authService = inject(AuthenticationService);
+  router = inject(Router);
+
   ngOnInit() {
     this.createUserForm = new FormGroup({
-      user: new FormControl('', Validators.required),
+      username: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [
         Validators.required,
@@ -58,12 +69,12 @@ export class RegisterComponent implements OnInit {
       .get('confirm')
       .setValidators([
         Validators.required,
-        this.matchValidator(this.createUserForm.value['password']),
+        this.matchValidator(this.createUserForm),
       ]);
   }
 
   updateUserError() {
-    if (this.createUserForm.get('user').hasError('required')) {
+    if (this.createUserForm.get('username').hasError('required')) {
       this.userError.set('User name is required');
     }
   }
@@ -85,21 +96,36 @@ export class RegisterComponent implements OnInit {
   }
 
   updateConfirmError() {
-    console.log(this.createUserForm.get('confirm').hasError('notMatch'));
     if (this.createUserForm.get('confirm').hasError('required')) {
       this.confirmError.set('Please confirm password');
     } else if (this.createUserForm.get('confirm').hasError('notMatch')) {
       this.confirmError.set('Password not Match');
     }
-    console.log(this.confirmError());
   }
 
-  matchValidator(password: string): ValidatorFn {
+  // custom validation function
+  matchValidator(form: FormGroup): ValidatorFn {
     return (control: AbstractControl): { [e: string]: boolean } | null => {
-      if (password !== control.value) {
+      if (form.value['password'] !== control.value) {
         return { notMatch: true };
       }
       return null;
     };
+  }
+
+  // on submit the form
+  onSubmit() {
+    const data: registerRequest = {
+      username: this.createUserForm.value['username'],
+      email: this.createUserForm.value['email'],
+      password: this.createUserForm.value['password'],
+      role: 'user',
+    };
+    this.authService.createUser(data).subscribe((res: registerResponse) => {
+      // store the token
+      localStorage.setItem('token', res.token);
+      // navigate to all tasks
+      this.router.navigate(['allTasks']);
+    });
   }
 }

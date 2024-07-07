@@ -1,7 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from '../../../../environments/environment.development';
-import { loginRequest, registerRequest } from '../models/authentication';
+import {
+  loginRequest,
+  registerRequest,
+  registerResponse,
+} from '../models/authentication';
 
 @Injectable()
 export class AuthenticationService {
@@ -11,6 +15,9 @@ export class AuthenticationService {
   }
 
   createUser(data: registerRequest) {
-    return this.http.post(`${environment.baseAPI}/auth/createAccount`, data);
+    return this.http.post<registerResponse>(
+      `${environment.baseAPI}auth/createAccount`,
+      data
+    );
   }
 }
