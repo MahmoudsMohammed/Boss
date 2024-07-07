@@ -3,3 +3,10 @@ export interface loginRequest {
   password: string;
   role: string;
 }
+
+export interface registerRequest {
+  email: string;
+  password: string;
+  username: string;
+  role: string;
+}

@@ -37,6 +37,6 @@
     <mat-error>{{ passwordError() }}</mat-error>
     }
   </mat-form-field>
-  <button type="submit">Login</button>
+  <button type="submit" [disabled]="userLoginForm.invalid">Login</button>
 </form>
 <p>Create new account ? <a routerLink="/auth/register">Sign-Up</a></p>
