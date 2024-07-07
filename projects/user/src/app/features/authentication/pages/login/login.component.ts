@@ -16,8 +16,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { AuthenticationService } from '../../services/authentication.service';
-import { loginRequest } from '../../models/authentication';
-import { RouterLink } from '@angular/router';
+import { loginRequest, loginResponse } from '../../models/authentication';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -43,6 +43,7 @@ export class LoginComponent implements OnInit {
 
   // injection
   authServices = inject(AuthenticationService);
+  router = inject(Router);
 
   ngOnInit() {
     this.userLoginForm = new FormGroup({
@@ -77,8 +78,11 @@ export class LoginComponent implements OnInit {
       role: 'user',
     };
 
-    this.authServices.userLogin(data).subscribe((res) => {
-      console.log(res);
+    this.authServices.userLogin(data).subscribe((res: loginResponse) => {
+      // store token in LS
+      localStorage.setItem('token', res.token);
+      // navigate to all tasks
+      this.router.navigate(['allTasks']);
     });
   }
 }

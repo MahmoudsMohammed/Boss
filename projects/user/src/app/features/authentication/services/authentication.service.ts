@@ -3,6 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { environment } from '../../../../environments/environment.development';
 import {
   loginRequest,
+  loginResponse,
   registerRequest,
   registerResponse,
 } from '../models/authentication';
@@ -11,7 +12,10 @@ import {
 export class AuthenticationService {
   http = inject(HttpClient);
   userLogin(data: loginRequest) {
-    return this.http.post(`${environment.baseAPI}auth/login`, data);
+    return this.http.post<loginResponse>(
+      `${environment.baseAPI}auth/login`,
+      data
+    );
   }
 
   createUser(data: registerRequest) {
